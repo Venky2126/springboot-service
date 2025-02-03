@@ -14,3 +14,6 @@ https://www.pixeltrice.com/build-spring-boot-chat-application-from-scratch/
 https://www.pixeltrice.com/integrate-facebook-for-social-login-in-your-spring-boot-application/
 
 
+
+git config --global user.name "Venky2126"
+git config --global user.email "tech.venkat21@gmail.com"
