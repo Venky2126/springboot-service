@@ -1,4 +1,4 @@
-package com.otp.app.otp_one_time_password_service;
+package com.otp.app.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,3 +11,5 @@ class OtpOneTimePasswordServiceApplicationTests {
 	}
 
 }
+
+
