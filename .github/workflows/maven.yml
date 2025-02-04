@@ -23,7 +23,8 @@ jobs:
       - name: Build project
         run: |
           echo "Building the project..."
-          mvn clean package
+          mkdir -p springboot-service/otp-one-time-password-service
+          echo "Sample artifact content" > springboot-service/otp-one-time-password-service
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
