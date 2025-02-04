@@ -95,7 +95,7 @@ jobs:
           cd otp-one-time-password-service
           mvn versions:display-dependency-updates
 
-  docker:
+   docker:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
