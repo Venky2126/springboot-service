@@ -1,28 +1,25 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-	<div th:replace="~{header :: header}" />
-	<div class="container">
+    <div th:replace="~{header :: header}" />
+    <div class="container">
 
-		<div class="starter-template">
-			<h2>OTP - Validate your OTP</h2>
+        <div class="starter-template">
+            <h2>OTP - Validate your OTP</h2>
 
-			<h3 th:inline="text">Please Enter OTP</h3>
- 				
- 			<form id="validateOtp" name="validateOtp" method="post">
+            <h3 th:inline="text">Please Enter OTP</h3>
+
+            <div id="otpMessage"></div>
+            
+            <form id="validateOtp" name="validateOtp" method="post">
                 <fieldset>
 
-                    <div th:if="${param.error}">
-                        <div class="alert alert-danger">
-                            Invalid Otp Try Again 
-                        </div>
-                    </div>
-                     
                     <div class="form-group">
                         <input type="text" name="otpnum" id="otpnum" class="form-control input-lg"
                                required="true" autofocus="true"/>
@@ -37,48 +34,40 @@
                     </div>
                 </fieldset>
             </form>
-		</div>
+        </div>
+    </div>
 
-		 
-	</div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	<script type="text/javascript"
-		src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script type="text/javascript"
-        src="webjars/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#validateOtp").submit(function (event) {
+                // Stop submit the form, we will post it manually.
+                event.preventDefault();
 
-	
-	<script type="text/javascript">
-	$(document).ready(function () {
-
-	    $("#validateOtp").submit(function (event) {
-
-	        //stop submit the form, we will post it manually.
-	        event.preventDefault();
-
-	        var data  = 'otpnum='+$("#otpnum").val();
-			
-	        alert(data);
-	        
-	        $.ajax({
-	            type: "GET",
-	            url:  "/validateOtp",
-	            data: data,
-	            dataType: 'text',
-	            cache: false,
-	            timeout: 600000,
-	            success : function(response) {
-                    alert( response );
-                },
-                error : function(xhr, status, error) {
-                    alert(xhr.responseText);
-                }
-	        });
-	    });
-
-	});
-
-	 
-	</script>
+                var data  = 'otpnum=' + $("#otpnum").val();
+                
+                $.ajax({
+                    type: "GET",
+                    url:  "/validateOtp",
+                    data: data,
+                    dataType: 'text',
+                    cache: false,
+                    timeout: 600000,
+                    success: function(response) {
+                        if (response === "verified") {
+                            $("#otpMessage").html('<div class="alert alert-success">Verified</div>');
+                        } else {
+                            $("#otpMessage").html('<div class="alert alert-danger">Invalid Otp Try Again</div>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        $("#otpMessage").html('<div class="alert alert-danger">' + xhr.responseText + '</div>');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -6,9 +6,9 @@ import java.util.Map;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.otp.app.service.EmailService;
 import com.otp.app.service.OTPService;
@@ -23,50 +23,49 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class OTPController {
 
-	private final OTPService otpService;
-	private final EmailService emailService;
+    private final OTPService otpService;
+    private final EmailService emailService;
 
-	@GetMapping("/generateOtp")
-	public String generateOtp() throws MessagingException {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
+    @GetMapping("/generateOtp")
+    public String generateOtp() throws MessagingException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
 
-		int otp = otpService.generateOTP(username);
-		log.info("OTP : " + otp);
+        int otp = otpService.generateOTP(username);
+        log.info("OTP : " + otp);
 
-		// Generate the Template to send OTP
-		EmailTemplate template = new EmailTemplate("SendOTP.html");
-		Map<String, String> replacements = new HashMap<>();
-		replacements.put("user", username);
-		replacements.put("otpnum", String.valueOf(otp));
-		String message = template.getTemplate(replacements);
-		emailService.sendOtpMessage("emailAddress of the person to whom OTP send", "OTP - Spring Boot", message);
-		return "otppage";
-	}
+        // Generate the Template to send OTP
+        EmailTemplate template = new EmailTemplate("SendOTP.html");
+        Map<String, String> replacements = new HashMap<>();
+        replacements.put("user", username);
+        replacements.put("otpnum", String.valueOf(otp));
+        String message = template.getTemplate(replacements);
+        emailService.sendOtpMessage("emailAddress of the person to whom OTP send", "OTP - Spring Boot", message);
+        return "otppage";
+    }
 
-	@GetMapping("/validateOtp")
-	public String validateOtp(@RequestParam int otpnum, Model model) {
-		final String SUCCESS = "Entered Otp is valid";
-		final String FAIL = "Entered Otp is NOT valid. Please Retry!";
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
-		// Validate the Otp
-		if (otpnum >= 0) {
-			int serverOtp = otpService.getOtp(username);
-			if (serverOtp > 0) {
-				if (otpnum == serverOtp) {
-					otpService.clearOTP(username);
-					return ("Entered Otp is valid");
-				} else {
-					return SUCCESS;
-				}
-			} else {
-				return FAIL;
-			}
-		} else {
-			return FAIL;
-		}
-
-	}
-
+    @GetMapping("/validateOtp")
+    @ResponseBody
+    public String validateOtp(@RequestParam int otpnum) {
+        final String SUCCESS = "verified";
+        final String FAIL = "Invalid Otp Try Again";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        // Validate the Otp
+        if (otpnum >= 0) {
+            int serverOtp = otpService.getOtp(username);
+            if (serverOtp > 0) {
+                if (otpnum == serverOtp) {
+                    otpService.clearOTP(username);
+                    return SUCCESS;
+                } else {
+                    return FAIL;
+                }
+            } else {
+                return FAIL;
+            }
+        } else {
+            return FAIL;
+        }
+    }
 }
