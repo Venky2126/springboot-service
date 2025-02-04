@@ -25,22 +25,20 @@ jobs:
         run: |
           echo "Listing root directory:"
           ls -la
-          echo "Listing springboot-service directory:"
-          ls -la springboot-service
           echo "Listing otp-one-time-password-service directory:"
-          ls -la springboot-service/otp-one-time-password-service
+          ls -la otp-one-time-password-service
 
       - name: Build project
         run: |
           echo "Building the project..."
-          cd springboot-service/otp-one-time-password-service
+          cd otp-one-time-password-service
           mvn clean package
       
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
-          path: springboot-service/otp-one-time-password-service/target
+          path: otp-one-time-password-service/target
 
   test:
     runs-on: ubuntu-latest
@@ -64,12 +62,12 @@ jobs:
       
       - name: Test with Maven
         run: |
-          cd springboot-service/otp-one-time-password-service
+          cd otp-one-time-password-service
           mvn test
       
       - name: Integration tests
         run: |
-          cd springboot-service/otp-one-time-password-service
+          cd otp-one-time-password-service
           mvn verify
 
   dependency-check:
@@ -94,7 +92,7 @@ jobs:
       
       - name: Check for outdated dependencies
         run: |
-          cd springboot-service/otp-one-time-password-service
+          cd otp-one-time-password-service
           mvn versions:display-dependency-updates
 
   docker:
@@ -108,7 +106,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-artifacts
-          path: springboot-service/otp-one-time-password-service/target/
+          path: otp-one-time-password-service/target/
       
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v6
@@ -116,6 +114,6 @@ jobs:
           image: venkydasari/greetify
           tags: latest
           registry: docker.io
-          dockerfile: springboot-service/otp-one-time-password-service/Dockerfile
+          dockerfile: otp-one-time-password-service/Dockerfile
           username: '${{ secrets.DOCKER_USERNAME }}'
           password: '${{ secrets.DOCKER_PASSWORD }}'
