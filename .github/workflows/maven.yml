@@ -118,11 +118,11 @@ jobs:
           echo "Listing target directory:"
           ls -la otp-one-time-password-service/target
 
-      - name: Build & push Docker image
-        # run: |
-        #   docker build -t venkydasari/otp .
-        #   docker push venkydasari/otp
-        # working-directory: ./
+      # - name: Build & push Docker image
+      #   run: |
+      #     docker build -t venkydasari/otp .
+      #     docker push venkydasari/otp
+      #   working-directory: ./
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
