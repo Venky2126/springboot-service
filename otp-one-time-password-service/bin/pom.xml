@@ -131,7 +131,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>otp-service</finalName>
 	</build>
 	<repositories>
 		<repository>
