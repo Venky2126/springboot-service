@@ -1,6 +1,5 @@
 package com.otp.app.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,14 +15,15 @@ import com.otp.app.service.OTPService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 	@Value("${spring.application.name}")
 	String appName;
 
-	@Autowired
-	public OTPService otpService;
+	public final OTPService otpService;
 
 	@GetMapping("/")
 	public String homePage(Model model) {

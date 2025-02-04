@@ -3,8 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
-	<div th:replace="~{header :: header-css}" />
-	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
 	<div th:replace="~{header :: header}" />
@@ -13,7 +12,7 @@
 		<div class="starter-template">
 			<h2>OTP - Validate your OTP</h2>
 
-			<h3 th:inline="text">Hello : [[${username}]]!</h3>
+			<h3 th:inline="text">Please Enter OTP</h3>
  				
  			<form id="validateOtp" name="validateOtp" method="post">
                 <fieldset>

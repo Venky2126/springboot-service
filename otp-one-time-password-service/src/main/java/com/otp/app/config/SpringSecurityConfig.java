@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,21 +12,21 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 import com.otp.app.service.UserService;
 
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SpringSecurityConfig {
+@NoArgsConstructor
+ class SpringSecurityConfig {
 
-    @Autowired
     private AccessDeniedHandler accessDeniedHandler;
     @Autowired
     private UserService userService;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         log.info("Configuring Spring Security");
         http.csrf(csrf -> csrf.disable()) // use lambda DSL to disable CSRF
                 .authorizeHttpRequests(authorize -> authorize.requestMatchers("/", "/aboutus").permitAll()
@@ -41,17 +40,17 @@ public class SpringSecurityConfig {
     }
 
     @Bean
-    public AccessDeniedHandler accessDeniedHandler() {
+     AccessDeniedHandler accessDeniedHandler() {
         return new CustomAccessDeniedHandler();
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
+     BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Autowired
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+     void configure(AuthenticationManagerBuilder auth) throws Exception {
         log.info("Configuring Global Authentication");
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }

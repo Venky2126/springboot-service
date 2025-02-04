@@ -2,7 +2,6 @@ package com.otp.app.service;
 
 import java.util.Arrays;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -14,11 +13,13 @@ import org.springframework.stereotype.Service;
 import com.otp.app.model.UserPojo;
 import com.otp.app.repo.UserRepository;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class UserService implements UserDetailsService {
 
-	@Autowired
-	private  UserRepository userRepository;
+	private final UserRepository userRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
