@@ -10,6 +10,8 @@ body {
 	font-family: Arial, sans-serif;
 }
 
+/* sidebar css */
+
 .sidebar {
 	background-color: #f0f0f0;
 	padding: 20px;
@@ -36,6 +38,7 @@ body {
 
 .content {
 	padding: 20px;
+	
 }
 
 .card {
@@ -45,3 +48,5 @@ body {
 .card-body {
 	padding: 20px;
 }
+
+  
