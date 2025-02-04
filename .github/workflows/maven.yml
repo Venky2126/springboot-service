@@ -63,7 +63,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-artifacts
-          path: target/
+          path: otp-one-time-password-service/target
 
       - name: Test with Maven
         run: |
@@ -93,7 +93,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-artifacts
-          path: target/
+          path: otp-one-time-password-service/target
 
       - name: Check for outdated dependencies
         run: |
@@ -111,16 +111,17 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-artifacts
-          path: otp-one-time-password-service/target/
+          path: otp-one-time-password-service/target
 
       - name: Verify target directory
         run: |
           echo "Listing target directory:"
-          ls -la otp-one-time-password-service/target/
+          ls -la otp-one-time-password-service/target
 
       - name: Build & push Docker image
         run: |
           docker build -f otp-one-time-password-service/Dockerfile -t docker.io/venkydasari/otp:latest .
+        working-directory: ./otp-one-time-password-service
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
