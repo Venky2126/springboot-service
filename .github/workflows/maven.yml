@@ -22,14 +22,14 @@ jobs:
         uses: actions/checkout@v3
       - name: Build project
         run: |
+          cd springboot-service/otp-one-time-password-service
           echo "Building the project..."
-          mkdir -p path/to/artifacts
-          echo "Sample artifact content" > path/to/artifacts/sample.txt
+          mvn clean package
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifacts  # Ensure this name is consistent
-          path: path/to/artifacts
+          name: build-artifacts
+          path: springboot-service/otp-one-time-password-service/target
 
   # test:
   #   runs-on: ubuntu-latest
@@ -46,12 +46,16 @@ jobs:
   #     - name: Download build artifacts
   #       uses: actions/download-artifact@v4
   #       with:
-  #         name: build-artifacts  # Ensure this matches the upload artifact name
+  #         name: build-artifacts
   #         path: target/
   #     - name: Test with Maven
-  #       run: mvn test
+  #       run: |
+  #         cd springboot-service/otp-one-time-password-service
+  #         mvn test
   #     - name: Integration tests
-  #       run: mvn verify
+  #       run: |
+  #         cd springboot-service/otp-one-time-password-service
+  #         mvn verify
 
   dependency-check:
     runs-on: ubuntu-latest
@@ -68,10 +72,12 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-artifacts  # Ensure this matches the upload artifact name
+          name: build-artifacts
           path: target/
       - name: Check for outdated dependencies
-        run: mvn versions:display-dependency-updates
+        run: |
+          cd springboot-service/otp-one-time-password-service
+          mvn versions:display-dependency-updates
 
   docker:
     runs-on: ubuntu-latest
@@ -82,14 +88,14 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-artifacts  # Ensure this matches the upload artifact name
-          path: target/
+          name: build-artifacts
+          path: springboot-service/otp-one-time-password-service/target/
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
           image: venkydasari/greetify
           tags: latest
           registry: docker.io
-          dockerfile: Dockerfile
+          dockerfile: springboot-service/otp-one-time-password-service/Dockerfile
           username: '${{ secrets.DOCKER_USERNAME }}'
           password: '${{ secrets.DOCKER_PASSWORD }}'
