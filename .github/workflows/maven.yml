@@ -32,7 +32,12 @@ jobs:
         run: |
           echo "Building the project..."
           cd otp-one-time-password-service
-          mvn clean package
+          mvn clean install
+
+      - name: Verify target directory
+        run: |
+          echo "Listing target directory:"
+          ls -la otp-one-time-password-service/target
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
