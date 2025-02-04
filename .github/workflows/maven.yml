@@ -120,7 +120,8 @@ jobs:
 
       - name: Build & push Docker image
         run: |
-          docker build -f otp-one-time-password-service/Dockerfile -t docker.io/venkydasari/otp:latest .
+          docker build -t venkydasari/otp .
+          docker push venkydasari/otp
         working-directory: ./
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
