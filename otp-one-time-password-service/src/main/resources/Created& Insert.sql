@@ -11,3 +11,4 @@ INSERT INTO users (username, country, full_name, password, role)
 VALUES 
     ('admin', 'India', 'Admin -Jack', '$2a$10$Z5F2Elzpnwx6kp0CYLmdo.Tcv8SZWMANvlr/PWr6.IxWWXnAi7KNC', 'ROLE_ADMIN'),
     ('user', 'USA', 'User-Ruby', '$2a$10$KFsPE4H9buyijUht5nQU..qdpkDRA5q6zPeACtLVWAaDh3kMzPxXG', 'ROLE_USER');
+	('venky', 'USA', 'User-Venky', '$2a$10$2DjQ.lajtmXjkGCkI89MA.vnko1EQ3Q9QCwn7MrdvDrAQx.nAN7T.', 'ROLE_USER');

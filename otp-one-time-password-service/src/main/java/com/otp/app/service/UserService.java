@@ -8,30 +8,45 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.otp.app.model.UserPojo;
-import com.otp.app.repo.UserRepository;
+import com.otp.app.model.UserRequest;
+import com.otp.app.repo.UserRequestRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class UserService implements UserDetailsService {
 
-	private final UserRepository userRepository;
+	private final UserRequestRepository userRequestRepository;
 
+	// This method is used by Spring Security
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		UserPojo userPojo = userRepository.findByUsername(username);
+		UserRequest userRequest = userRequestRepository.findByUsername(username);
 
-		if (userPojo == null) {
+		if (userRequest == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
 
-		GrantedAuthority authority = new SimpleGrantedAuthority(userPojo.getRole());
-		return new User(userPojo.getUsername(), userPojo.getPassword(), Arrays.asList(authority));
+		GrantedAuthority authority = new SimpleGrantedAuthority(userRequest.getRole());
+		return new User(userRequest.getUsername(), userRequest.getPassword(), Arrays.asList(authority));
+	}
+
+	// This method is used to save the user details
+	public UserRequest saveUser(UserRequest userRequest) {
+		// convert the password to encrypted format using BCryptPasswordEncoder and save it
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String hashedPassword = passwordEncoder.encode(userRequest.getPassword());
+		userRequest.setPassword(hashedPassword);
+		log.info("UserRequest : {}", userRequest);
+		return userRequestRepository.save(userRequest);
 	}
 
 }

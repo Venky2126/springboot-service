@@ -30,6 +30,14 @@ public class HomeController {
 		model.addAttribute("message", message);
 		return "signin";
 	}
+	
+	@GetMapping("/signup")
+	public String signUpPage(Model model) {
+//		String message = " Welcome to Home Page";
+//		model.addAttribute("appName", appName);
+//		model.addAttribute("message", message);
+		return "signup";
+	}
 
 	@GetMapping("/dashboard")
 	public String dashboard(Model model) {

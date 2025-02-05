@@ -21,7 +21,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 		
 		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
 		response.sendRedirect(request.getContextPath()+"/accessDenied");
-        log.info("UserPojo: "+auth.getName()+" attempted to access the protected URL: "+request.getRequestURI());
+        log.info("UserRequest: "+auth.getName()+" attempted to access the protected URL: "+request.getRequestURI());
 	}
 
 }

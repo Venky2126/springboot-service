@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
      SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         log.info("Configuring Spring Security");
         http.csrf(csrf -> csrf.disable()) // use lambda DSL to disable CSRF
-                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/", "/aboutus").permitAll()
+                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/", "/aboutus","/signup").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN").requestMatchers("/user/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin.loginPage("/login").defaultSuccessUrl("/dashboard", true)
