@@ -134,7 +134,12 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>otp-service-1.0.0</finalName>
+		<finalName>otp-one-time-password-service-1.0.0</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
 	</build>
 	<repositories>
 		<repository>
