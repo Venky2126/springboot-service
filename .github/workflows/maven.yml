@@ -118,12 +118,17 @@ jobs:
           echo "Listing target directory:"
           ls -la otp-one-time-password-service/target
 
-      - name: Build & push Docker image
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build Docker image
         run: |
-          # Set the correct working directory
           cd otp-one-time-password-service
-          # Build the Docker image using the correct context
           docker build -f Dockerfile -t docker.io/venkydasari/otp:latest .
+
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker push docker.io/venkydasari/otp:latest
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
