@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         body {
@@ -16,7 +17,7 @@
 
         .form-container {
             background-color: #7ad5e5d2;
-            padding: 60px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             width: 100%;
@@ -37,6 +38,16 @@
         .form-group button:hover {
             background-color: #0056b3;
         }
+
+        @media (max-width: 576px) {
+            .form-container {
+                padding: 15px;
+            }
+
+            .form-group button {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 
@@ -45,8 +56,6 @@
         <form th:action="@{/signup}" method="post">
             <fieldset>
                 <h1>User Registration</h1>
-
-
 
                 <div class="form-group">
                     <input type="text" name="username" id="username" class="form-control input-lg"
@@ -70,12 +79,8 @@
                 </div>
 
                 <div class="row">
-
-                    <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="col-12">
                         <button type="submit" class="btn btn-lg btn-success btn-block">Sign Up</button>
-
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6">
                     </div>
                 </div>
             </fieldset>

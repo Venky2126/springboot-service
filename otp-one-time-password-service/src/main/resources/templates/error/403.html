@@ -1,20 +1,35 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css">
+    <style>
+        .starter-template {
+            padding: 100px 15px;
+            text-align: center;
+        }
+
+        .starter-template h1 {
+            color: red;
+        }
+
+        @media (max-width: 576px) {
+            .starter-template {
+                padding: 50px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div th:replace="~{header :: header}"/>
+<div th:replace="~{header :: header}"></div>
 <div class="container">
 
     <div class="starter-template">
-        <h1 style="color: red;">403 - Access is denied</h1>
-        <h2 th:inline="text">Hello : [[${username}]],you do not have permission to access this page.</h2>
+        <h1>403 - Access is denied</h1>
+        <h2 th:inline="text">Hello : [[${username}]], you do not have permission to access this page.</h2>
     </div>
 
 </div> 
- 
-
 </body>
 </html>

@@ -1,27 +1,54 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-	<title>SpringBoot -OTP ::admin page</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>SpringBoot -OTP ::admin page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .starter-template {
+            padding: 100px 15px;
+            text-align: center;
+        }
+
+        .starter-template h1 {
+            color: rgb(255, 111, 0);
+        }
+
+        .starter-template h1.inline-text {
+            color: rgb(13, 13, 89);
+        }
+
+        @media (max-width: 576px) {
+            .starter-template {
+                padding: 50px 15px;
+            }
+
+            .btn-success {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-	<div th:replace="~{header :: header}" />
-	<div class="container">
-		<div class="starter-template">
-			<h1 style="padding: 100px; text-align: center; color: rgb(255, 111, 0);">Admin page (Spring Security protected)</h1>
-			<h1 style="color: rgb(13, 13, 89);" th:inline="text">Hello : [[${username}]]</h1>
-			One Time Password : <a th:href="@{/generateOtp}">OTP</a>
-		</div>
-		<div>
-			<h><span sec:authorize="isAuthenticated()">Logged Admin: <span sec:authentication="name"></span></span></h>
-		</div>
-		<div>
-			<h>Roles: <span sec:authentication="principal.authorities"></span> </h>
-		</div>
-		<a button type="button" class="btn btn-success" th:href="@{/dashboard}">Back </a>
-	</div>
+    <div th:replace="~{header :: header}"></div>
+    <div class="container">
+        <div class="starter-template">
+            <h1>Admin page (Spring Security protected)</h1>
+            <h1 class="inline-text" th:inline="text">Hello : [[${username}]]</h1>
+            One Time Password : <a th:href="@{/generateOtp}">OTP</a>
+        </div>
+        <div>
+            <h><span sec:authorize="isAuthenticated()">Logged Admin: <span sec:authentication="name"></span></span></h>
+        </div>
+        <div>
+            <h>Roles: <span sec:authentication="principal.authorities"></span> </h>
+        </div>
+        <a class="btn btn-success" th:href="@{/dashboard}">Back</a>
+    </div>
 
-
-	<script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

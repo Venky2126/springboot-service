@@ -1,9 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
-        /* footer css*/
+        /* footer css */
         .footer {
             position: fixed;
             bottom: 0;
@@ -27,23 +28,22 @@
             color: #23527c;
         }
     </style>
-
 </head>
 <body>
 
-<div th:replace="~{header :: header}"/>
+<div th:replace="~{header :: header}"></div>
 
 <div class="container">
-
     <div class="starter-template">
-        <h1 style="padding: 100px; text-align: center;" >About Us </h1>
+        <h1 style="padding: 100px; text-align: center;">About Us</h1>
         <h2 style="color: blue;">OTP (One Time Password) integration with Spring boot and Spring Security</h2>
     </div>
-
 </div> 
- <!-- Import Footer -->
- <div th:replace="~{footer :: footer}"></div>
 
+<!-- Import Footer -->
+<div th:replace="~{footer :: footer}"></div>
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

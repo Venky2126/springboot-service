@@ -2,7 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    .footer {
+      background-color: #f8f9fa;
+      padding: 20px 0;
+    }
+
+    .social-link {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .social-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 576px) {
+      .text-right {
+        text-align: center !important;
+        margin-top: 10px;
+      }
+
+      .list-inline {
+        padding-left: 0;
+        list-style: none;
+      }
+
+      .list-inline-item {
+        display: inline-block;
+        margin-right: .5rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -25,6 +58,8 @@
     </footer>
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 
 </html>

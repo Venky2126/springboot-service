@@ -1,12 +1,10 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <div th:fragment="header-css">
         <!-- this is header-css -->
-        <link rel="stylesheet" type="text/css"
-              href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-
-        <!-- <link rel="stylesheet" th:href="@{/css/main.css}"
-              href="../../css/main.css" /> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     </div>
 </head>
 <body>
@@ -20,27 +18,29 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" th:href="@{/dashboard}">Dashboard <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item" sec:authorize="hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')">
-                <a class="nav-link" th:href="@{/403}" sec:authorize="hasRole('ROLE_ADMIN')">User</a>
-                <a class="nav-link" th:href="@{/user}" sec:authorize="hasRole('ROLE_USER')">User</a>
-              </li>
-              <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                <a class="nav-link" th:href="@{/admin}">Admin</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" th:href="@{/aboutus}">AboutUs</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" th:href="@{/logout}">Logout</a>
-              </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/dashboard}">Dashboard <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/user}" sec:authorize="hasRole('ROLE_USER')">User</a>
+                    <a class="nav-link" th:href="@{/403}" sec:authorize="hasRole('ROLE_ADMIN')">User</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link" th:href="@{/admin}">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/aboutus}">AboutUs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                </li>
             </ul>
-          </div>
-          
+        </div>
     </nav>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
