@@ -42,7 +42,7 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifacts
+          name: otp-one-time-password-service-jar
           path: otp-one-time-password-service/target
 
   test:
@@ -62,7 +62,7 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-artifacts
+          name: otp-one-time-password-service-jar
           path: otp-one-time-password-service/target
 
       - name: Test with Maven
@@ -92,7 +92,7 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-artifacts
+          name: otp-one-time-password-service-jar
           path: otp-one-time-password-service/target
 
       - name: Check for outdated dependencies
@@ -111,13 +111,19 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: otp-one-time-password-service-jar
-          path: target/
+          path: otp-one-time-password-service/target
+
+      - name: Verify target directory
+        run: |
+          echo "Listing target directory:"
+          ls -la otp-one-time-password-service/target
+
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
           image: venkydasari/otp
           tags: latest
           registry: docker.io
-          dockerfile: Dockerfile
-          username: '${{ secrets.DOCKER_USERNAME }}'
-          password: '${{ secrets.DOCKER_PASSWORD }}'
+          dockerfile: otp-one-time-password-service/Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
