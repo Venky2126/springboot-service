@@ -43,10 +43,10 @@ public class OTPController {
 		log.info("OTP : " + otp);
 
 		// Generate the Template to send OTP
-		EmailTemplate template = new EmailTemplate("SendOTP.html");
+		EmailTemplate template = new EmailTemplate("SendOtp.html");
 		Map<String, String> replacements = new HashMap<>();
-		replacements.put("user", username);
-		replacements.put("otpnum", String.valueOf(otp));
+		replacements.put("username", username);
+		replacements.put("otp", String.valueOf(otp));
 		String message = template.getTemplate(replacements);
 
 		log.info("OTP Mail to : " + userRequest.getEmail());

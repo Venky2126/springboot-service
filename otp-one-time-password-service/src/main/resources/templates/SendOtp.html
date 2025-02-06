@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            /* Add your background image URL here */
+            background-image: url('https://images.unsplash.com/photo-1601662528567-526cd06f6582?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHdoaXRlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D');
+            width: 80%;
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #666;
+        }
+
+        p {
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                margin: 20px auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+                margin: 10px auto;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Hi {{username}}</h1>
+        <br />
+        <h2 style="color: black">Your OTP Number is: {{otp}}</h2>
+        <br />
+        <p style="color: darkblue;">Thanks&Regards,<br>Venkatesh Dasari,<br>7997227679. <br><a style="color: darkblue;"
+                href="https://otp-wh4v.onrender.com/">https://otp-wh4v.onrender.com/</a></p>
+    </div>
+</body>
+
+</html>
