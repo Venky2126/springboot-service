@@ -1,9 +1,11 @@
 package com.otp.app.template;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class EmailTemplate {
 
@@ -15,16 +17,17 @@ public class EmailTemplate {
 		} catch (Exception e) {
 			this.template = "Empty Template";
 		}
-
 	}
 
 	private String loadTemplate(String customTemplate) throws Exception {
-
 		ClassLoader classLoader = getClass().getClassLoader();
-		File file = new File(classLoader.getResource(customTemplate).getFile());
+		InputStream inputStream = classLoader.getResourceAsStream(customTemplate);
+		if (inputStream == null) {
+			throw new Exception("Could not find template with name " + customTemplate);
+		}
 		String content = "Empty Template";
-		try {
-			content = new String(Files.readAllBytes(file.toPath()));
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+			content = reader.lines().collect(Collectors.joining(System.lineSeparator()));
 		} catch (IOException e) {
 			throw new Exception("Could not read template with name " + customTemplate);
 		}
@@ -39,5 +42,4 @@ public class EmailTemplate {
 		}
 		return cTemplate;
 	}
-
 }

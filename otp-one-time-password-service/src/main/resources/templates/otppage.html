@@ -4,32 +4,42 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .starter-template {
+            padding: 100px 15px;
+            text-align: center;
+        }
+
+        @media (max-width: 576px) {
+            .starter-template {
+                padding: 50px 15px;
+            }
+
+            .btn-block {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div th:replace="~{header :: header}" />
+    <div th:replace="~{header :: header}"></div>
     <div class="container">
-
         <div class="starter-template">
             <h2>OTP - Validate your OTP</h2>
-
             <h3 th:inline="text">Please Enter OTP</h3>
-
             <div id="otpMessage"></div>
-            
             <form id="validateOtp" name="validateOtp" method="post">
                 <fieldset>
-
                     <div class="form-group">
                         <input type="text" name="otpnum" id="otpnum" class="form-control input-lg"
                                required="true" autofocus="true"/>
                     </div>
-
                     <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="col-12">
                             <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit"/>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
                         </div>
                     </div>
                 </fieldset>
@@ -38,7 +48,7 @@
     </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {

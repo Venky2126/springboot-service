@@ -74,7 +74,6 @@
                 <div class="form-group">
                     <!-- To send role to backedn -->
                     <select class="form-control" id="role" name="role">
-                        <option value="">Select Role</option>
                         <option value="ROLE_USER">User</option>
                         <option value="ROLE_ADMIN">Admin</option>
 
@@ -86,8 +85,18 @@
                         placeholder="Full Name" required="true" />
                 </div>
                 <div class="form-group">
-                    <input type="text" name="country" id="country" class="form-control input-lg" placeholder="Country"
-                        required="true" />
+                    <!-- To send country to backedn -->
+                    <select class="form-control" id="country" name="country">
+                        <option value="India">India</option>
+                        <option value="China">China</option>
+                        <option value="USA">USA</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Germany">Germany</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="France">France</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Italy">Italy</option>
+                    </select>
                 </div>
 
                 <div class="row">
