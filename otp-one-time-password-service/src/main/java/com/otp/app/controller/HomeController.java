@@ -33,9 +33,6 @@ public class HomeController {
 	
 	@GetMapping("/signup")
 	public String signUpPage(Model model) {
-//		String message = " Welcome to Home Page";
-//		model.addAttribute("appName", appName);
-//		model.addAttribute("message", message);
 		return "signup";
 	}
 

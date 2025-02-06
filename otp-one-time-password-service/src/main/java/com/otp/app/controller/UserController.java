@@ -24,8 +24,8 @@ public class UserController {
 		userService.saveUser(userRequest);
 		log.info("User added successfully : {}", userRequest);
 		
-		//it will redirect to all API aboutus
-		return "aboutus";
+		//it will redirect to  API signin
+		return "signin";
 	}
 
 }

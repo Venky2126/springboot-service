@@ -3,6 +3,8 @@ package com.otp.app.service;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nonnull;
+
 import org.springframework.stereotype.Service;
 
 import com.google.common.cache.CacheBuilder;
@@ -25,7 +27,7 @@ public class OTPService {
 		super();
 		otpCache = CacheBuilder.newBuilder().expireAfterWrite(EXPIRATION, TimeUnit.MINUTES)
 				.build(new CacheLoader<String, Integer>() {
-					public Integer load(String key) {
+					public Integer load(@Nonnull String key) {
 						return 0;
 					}
 				});

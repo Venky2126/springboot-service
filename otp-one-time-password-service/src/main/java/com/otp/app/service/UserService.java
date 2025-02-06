@@ -15,7 +15,6 @@ import com.otp.app.model.UserRequest;
 import com.otp.app.repo.UserRequestRepository;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
@@ -41,12 +40,27 @@ public class UserService implements UserDetailsService {
 
 	// This method is used to save the user details
 	public UserRequest saveUser(UserRequest userRequest) {
-		// convert the password to encrypted format using BCryptPasswordEncoder and save it
+		// convert the password to encrypted format using BCryptPasswordEncoder and save
+		// it
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(userRequest.getPassword());
 		userRequest.setPassword(hashedPassword);
 		log.info("UserRequest : {}", userRequest);
 		return userRequestRepository.save(userRequest);
+	}
+
+	// Fetch user by USERNAME to map email to OTP and send the email
+	public UserRequest getUser(String username) {
+		log.info("Username : {}", username);
+		UserRequest userRequest = userRequestRepository.findByUsername(username);
+		if (userRequest != null) {
+			log.info("UserRequest : {}", userRequest);
+			return userRequest;
+		} else {
+			log.info("User not found with username: {}", username);
+			return null;
+		}
+
 	}
 
 }

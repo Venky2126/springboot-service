@@ -14,12 +14,12 @@ public class EmailService {
 
 	private final JavaMailSender javaMailSender;
 
-	public void sendOtpMessage(String to, String subject, String message) throws MessagingException {
+	public void sendOtpMessage(String to, String message) throws MessagingException {
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 		helper.setFrom("tech.venkat26@gmail.com");
-		helper.setTo("tech.venkat21@gmail.com");
-		helper.setSubject("OTP for your account");
+		helper.setTo(to);
+		helper.setSubject("OTP Confirmation!");
 		helper.setText(message, true);
 		javaMailSender.send(mimeMessage);
 
