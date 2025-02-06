@@ -12,25 +12,28 @@ import lombok.Data;
 @Table(name = "users")
 @Data
 public class UserRequest {
-	
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(name="username")
+
+	@Column(name = "username", unique = true)
 	private String username;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
-	@Column(name="role")	
+
+	@Column(name = "email")
+	private String email;
+
+	@Column(name = "role")
 	private String role;
-	
-	@Column(name="full_name")	
+
+	@Column(name = "full_name")
 	private String fullName;
-	
-	@Column(name="country")	
+
+	@Column(name = "country")
 	private String country;
 
 }

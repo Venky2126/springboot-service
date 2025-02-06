@@ -65,17 +65,29 @@
                     <input type="password" name="password" id="password" class="form-control input-lg"
                         placeholder="Password" required="true" />
                 </div>
+
                 <div class="form-group">
-                    <input type="text" name="role" id="role" class="form-control input-lg" placeholder="Role"
+                    <input type="text" name="email" id="email" class="form-control input-lg" placeholder="E-Mail"
                         required="true" />
                 </div>
+
+                <div class="form-group">
+                    <!-- To send role to backedn -->
+                    <select class="form-control" id="role" name="role">
+                        <option value="">Select Role</option>
+                        <option value="ROLE_USER">User</option>
+                        <option value="ROLE_ADMIN">Admin</option>
+
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <input type="text" name="fullName" id="fullName" class="form-control input-lg"
                         placeholder="Full Name" required="true" />
                 </div>
                 <div class="form-group">
-                    <input type="text" name="country" id="country" class="form-control input-lg"
-                        placeholder="Country" required="true" />
+                    <input type="text" name="country" id="country" class="form-control input-lg" placeholder="Country"
+                        required="true" />
                 </div>
 
                 <div class="row">
