@@ -1,9 +1,10 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <style>
         body {
             display: flex;
@@ -50,42 +51,31 @@
         }
     </style>
 </head>
-
 <body>
     <div class="form-container">
-        <form th:action="@{/signup}" method="post">
+        <form id="signupForm" th:action="@{/signup}" method="post" onsubmit="return validateForm()">
             <fieldset>
                 <h1>User Registration</h1>
 
                 <div class="form-group">
-                    <input type="text" name="username" id="username" class="form-control input-lg"
-                        placeholder="UserName" required="true" autofocus="true" />
+                    <input type="text" name="username" id="username" class="form-control input-lg" placeholder="UserName" required="true" autofocus="true" />
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" id="password" class="form-control input-lg"
-                        placeholder="Password" required="true" />
+                    <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" required="true" />
                 </div>
-
                 <div class="form-group">
-                    <input type="text" name="email" id="email" class="form-control input-lg" placeholder="E-Mail"
-                        required="true" />
+                    <input type="text" name="email" id="email" class="form-control input-lg" placeholder="E-Mail" required="true" />
                 </div>
-
                 <div class="form-group">
-                    <!-- To send role to backedn -->
                     <select class="form-control" id="role" name="role">
                         <option value="ROLE_USER">User</option>
                         <option value="ROLE_ADMIN">Admin</option>
-
                     </select>
                 </div>
-
                 <div class="form-group">
-                    <input type="text" name="fullName" id="fullName" class="form-control input-lg"
-                        placeholder="Full Name" required="true" />
+                    <input type="text" name="fullName" id="fullName" class="form-control input-lg" placeholder="Full Name" required="true" />
                 </div>
                 <div class="form-group">
-                    <!-- To send country to backedn -->
                     <select class="form-control" id="country" name="country">
                         <option value="India">India</option>
                         <option value="China">China</option>
@@ -98,7 +88,14 @@
                         <option value="Italy">Italy</option>
                     </select>
                 </div>
-
+                <div class="row">
+                    <div class="col-2">
+                        <label>VERIFY</label>
+                    </div>
+                    <div class="col-4">
+                        <div class="g-recaptcha" data-sitekey="6LcqmM8qAAAAAOtviN25IPEQ0g-ku2p-4a4E05aL" required="true"></div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <button type="submit" class="btn btn-lg btn-success btn-block">Sign Up</button>
@@ -107,6 +104,27 @@
             </fieldset>
         </form>
     </div>
-</body>
 
+    <script>
+        function validateForm() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var email = document.getElementById('email').value;
+            var fullName = document.getElementById('fullName').value;
+            var recaptcha = grecaptcha.getResponse();
+
+            if (username === "" || password === "" || email === "" || fullName === "") {
+                alert("All fields must be filled out");
+                return false;
+            }
+
+            if (recaptcha === "") {
+                alert("Please complete the reCAPTCHA verification");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
 </html>
