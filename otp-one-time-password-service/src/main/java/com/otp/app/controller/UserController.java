@@ -1,9 +1,12 @@
 package com.otp.app.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.otp.app.model.UserRequest;
+import com.otp.app.service.ReCaptchaValidationService;
 import com.otp.app.service.UserService;
 
 import jakarta.validation.Valid;
@@ -15,17 +18,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserController {
 
-	private final UserService userService;;
+	private final UserService userService;
+	private final ReCaptchaValidationService reCaptchaValidationService;
 
-	//To Access the SignUp Page
 	@PostMapping("/signup")
-	public String handleAddUser(@Valid UserRequest userRequest) {
+	public String handleAddUser(@Valid UserRequest userRequest,
+			@RequestParam(name = "g-recaptcha-response") String captchaResponse, Model model) {
 		log.info("Handling add user request");
-		userService.saveUser(userRequest);
-		log.info("User added successfully : {}", userRequest);
-		
-		//it will redirect to  API signin
-		return "signin";
-	}
 
+		if (!reCaptchaValidationService.validateCaptcha(captchaResponse)) {
+			model.addAttribute("message", "Please verify captcha");
+			return "signup"; // Return to signup page if captcha validation fails
+		}
+		log.info("Captcha validation successful : {}", captchaResponse);
+
+		userService.saveUser(userRequest);
+		model.addAttribute("message", "User added successfully");
+		log.info("User added successfully: {}", userRequest);
+
+		return "signin"; // Redirect to signin page after successful registration
+	}
 }
