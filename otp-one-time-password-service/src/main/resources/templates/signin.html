@@ -53,7 +53,7 @@
 
 <body>
     <div class="form-container">
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/v1/login}" method="post">
             <fieldset>
                 <h1>Please Sign In</h1>
 
@@ -82,7 +82,7 @@
                         <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In" />
                     </div>
                     <div class="col-12">
-                        <a class="btn btn-lg btn-success btn-block" th:href="@{/signup}">Sign Up</a>
+                        <a class="btn btn-lg btn-success btn-block" th:href="@{/v1/signup}">Sign Up</a>
                     </div>
                 </div>
             </fieldset>
