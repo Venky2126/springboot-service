@@ -1,8 +1,9 @@
 common-encryption-service:
 
-required service
+required service's
 
 1.registration-service
+
 2.amazon-service
 
 
