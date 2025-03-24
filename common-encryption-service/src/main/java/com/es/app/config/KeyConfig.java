@@ -30,6 +30,11 @@ public class KeyConfig {
 		return decodePrivateKey(privateKey);
 	}
 
+	// Test error condition publickey
+	public RSAPublicKey getErrorPublicKey() throws NoSuchAlgorithmException, InvalidKeySpecException {
+		return convertToRSAPublicKey(null);
+	}
+
 	// convertToRSAPublicKey
 	private RSAPublicKey convertToRSAPublicKey(String base64PublicKey)
 			throws NoSuchAlgorithmException, InvalidKeySpecException {
