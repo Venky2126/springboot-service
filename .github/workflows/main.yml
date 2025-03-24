@@ -3,7 +3,7 @@ name: boot-app
 on:
   push:
     branches:
-      - main
+      - Master/master
   pull_request:
     branches:
       - develop
