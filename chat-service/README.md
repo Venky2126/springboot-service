@@ -1,0 +1,6 @@
+chat-service
+
+Issue :
+push access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+
+sol :  docker login 
