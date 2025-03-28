@@ -53,6 +53,7 @@ public class ChatController {
                 chatMessage.setContent(messageRequest.getContent());
                 chatMessage.setName(messageRequest.getName());
                 chatMessage.setSender(messageRequest.getSender());
+                chatMessage.setStatus("SENT");
                 chatMessageService.save(chatMessage);
 
                 return messageRequest;
@@ -101,19 +102,17 @@ public class ChatController {
         chatMessage.setContent(messageRequest.getContent());
         chatMessage.setName(messageRequest.getName());
         chatMessage.setSender(messageRequest.getSender());
+        chatMessage.setStatus("JOINED");
         chatMessageService.save(chatMessage);
 
         return messageRequest;
     }
 
-    @MessageMapping("/chat.removeUser")
-    @SendTo("/topic/public")
-    public ChatMessageRequest removeUser(@Payload ChatMessageRequest messageRequest,
-                                         SimpMessageHeaderAccessor headerAccessor) {
-        String sessionId = headerAccessor.getSessionId();
-        activeSessions.remove(sessionId); // Remove session ID from active sessions
-        log.info("User with session ID " + sessionId + " removed from active sessions.");
-
-        return messageRequest;
+    @MessageMapping("/chat.seenMessage")
+    @SendTo("/topic/seen")
+    public void seenMessage(@Payload Map<String, Object> payload) {
+        Long messageId = Long.valueOf(payload.get("messageId").toString());
+        String sessionId = payload.get("sessionId").toString();
+        chatMessageService.updateMessageStatusToSeen(messageId, sessionId);
     }
 }
