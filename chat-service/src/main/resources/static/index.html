@@ -6,15 +6,58 @@
     <title>Chat Application</title>
     <link rel="stylesheet" href="/css/main.css">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #333;
+            background-color: #e5ddd5; /* WhatsApp-like background color */
+            margin: 0;
+            padding: 0;
+        }
+        .chat-container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            background-image: url('whatsapp-bg.png'); /* WhatsApp-like background pattern */
+            background-repeat: repeat;
+        }
+        .chat-header {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .leave-chat {
+            background-color: #ff5c5c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
         .chat-message {
-            padding: 10px;
+            padding: 10px 15px;
             border-bottom: 1px solid #ddd;
             display: flex;
             justify-content: flex-start;
             position: relative;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
         }
         .chat-message.self {
             justify-content: flex-end;
+            background-color: #dcf8c6; /* WhatsApp-like self message color */
+        }
+        .chat-message.received {
+            background-color: #ffffff; /* Light background for received messages */
+            border: 1px solid #e0e0e0;
         }
         .chat-message .nickname {
             font-weight: bold;
@@ -28,6 +71,7 @@
             font-style: italic;
             color: #888;
             text-align: center;
+            margin-bottom: 10px;
         }
         .status {
             font-size: 0.8em;
@@ -57,11 +101,21 @@
                 padding: 10px;
             }
             .chat-message {
-                padding: 5px;
+                padding: 5px 10px;
             }
             .event-message {
                 padding: 5px;
             }
+        }
+        #messageArea {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        #messageArea li {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -88,7 +142,7 @@
 <div id="chat-page" class="hidden">
     <div class="chat-container">
         <div class="chat-header">
-            Boot Chat Application
+            <span id="chatHeader">Chat Application</span>
             <button id="leaveChat" class="leave-chat">Leave Chat</button>
         </div>
         <ul id="messageArea"></ul>
@@ -154,6 +208,9 @@
         stompClient.connect({}, function (frame) {
             document.querySelector('#username-page').classList.add('hidden');
             document.querySelector('#chat-page').classList.remove('hidden');
+
+            // Update chat header to display the user's name
+            document.getElementById('chatHeader').textContent = name;
 
             stompClient.send("/app/chat.addUser", {}, JSON.stringify(messageRequest));
 
@@ -242,7 +299,7 @@
             messageElement.classList.add('event-message');
             message.content = message.name + ' left!';
         } else {
-            messageElement.classList.add('chat-message');
+            messageElement.classList.add('chat-message', 'received'); // Add 'received' class for received messages
             if (message.sender === username) {
                 // Do not display the message again for the sender
                 return;
@@ -305,15 +362,15 @@
             }, 2000); // Hide "seen" status after 2 seconds
         }
 
-        // Update the blue tick to "Seen" for the sender
-        var messageElements = document.querySelectorAll('.chat-message.self');
-        messageElements.forEach(function (messageElement) {
+        // Update the blue tick to "Seen" for the specific message
+        var messageElement = document.querySelector(`.chat-message[data-message-id="${message.messageId}"]`);
+        if (messageElement) {
             var statusElement = messageElement.querySelector('.blue-tick');
             if (statusElement) {
                 statusElement.classList.add('seen'); // Change color to blue
                 statusElement.textContent = '✔✔'; // Ensure the tick remains
             }
-        });
+        }
     }
 
     function getSessionId() {
