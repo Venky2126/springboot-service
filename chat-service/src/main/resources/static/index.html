@@ -199,6 +199,7 @@
             timestampElement.classList.add('timestamp');
             timestampElement.textContent = chatMessage.timestamp;
             messageElement.appendChild(timestampElement);
+            messageElement.dataset.messageId = chatMessage.id; // Store message ID in the element
             document.querySelector('#messageArea').appendChild(messageElement);
             document.querySelector('#messageArea').scrollTop = document.querySelector('#messageArea').scrollHeight;
         }
@@ -266,6 +267,8 @@
         timestampElement.textContent = message.timestamp;
         messageElement.appendChild(timestampElement);
 
+        messageElement.dataset.messageId = message.id; // Store message ID in the element
+
         document.querySelector('#messageArea').appendChild(messageElement);
         document.querySelector('#messageArea').scrollTop = document.querySelector('#messageArea').scrollHeight;
     }
@@ -301,9 +304,7 @@
             var statusElement = messageElement.querySelector('.blue-tick');
             if (statusElement) {
                 statusElement.classList.add('seen'); // Change color to blue
-                setTimeout(() => {
-                    statusElement.remove();
-                }, 2000); // Hide "Seen" status after 2 seconds
+                statusElement.textContent = '✔✔'; // Ensure the tick remains
             }
         });
     }
