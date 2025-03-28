@@ -45,10 +45,10 @@ public class ChatController {
             messageRequest.setSender(sender);
             messageRequest.setName(name);
 
-            // Ensure message is only sent if another session is active
-            if (activeSessions.size() > 1) { // Changed condition to check if there is at least one active session
+            // Ensure message is only sent if there is at least one active session
+            if (!activeSessions.isEmpty()) {
                 ChatMessage chatMessage = new ChatMessage();
-                chatMessage.setMessageType(messageRequest.getMessageType());
+                chatMessage.setMessageType(messageRequest.getMessageType().name());
                 chatMessage.setContent(messageRequest.getContent());
                 chatMessage.setName(messageRequest.getName());
                 chatMessage.setSender(messageRequest.getSender());
@@ -61,6 +61,8 @@ public class ChatController {
                 log.info("No active sessions. Message not sent. Active sessions: " + activeSessions.size());
                 return null;
             }
+        } else {
+            log.error("Session attributes are null.");
         }
 
         return null;
@@ -98,7 +100,7 @@ public class ChatController {
         }
 
         ChatMessage chatMessage = new ChatMessage();
-        chatMessage.setMessageType(messageRequest.getMessageType());
+        chatMessage.setMessageType(messageRequest.getMessageType().name());
         chatMessage.setContent(messageRequest.getContent());
         chatMessage.setName(messageRequest.getName());
         chatMessage.setSender(messageRequest.getSender());
@@ -122,7 +124,7 @@ public class ChatController {
         }
 
         ChatMessage chatMessage = new ChatMessage();
-        chatMessage.setMessageType(messageRequest.getMessageType());
+        chatMessage.setMessageType(messageRequest.getMessageType().name());
         chatMessage.setContent(messageRequest.getContent());
         chatMessage.setName(messageRequest.getName());
         chatMessage.setSender(messageRequest.getSender());
@@ -138,10 +140,21 @@ public class ChatController {
         Long messageId = payload.containsKey("messageId") ? Long.valueOf(payload.get("messageId").toString()) : null;
         String sessionId = payload.containsKey("sessionId") ? payload.get("sessionId").toString() : null;
 
+        log.info("Received seenMessage request with payload: {}", payload);
+
         if (messageId != null && sessionId != null) {
             chatMessageService.updateMessageStatusToSeen(messageId);
+            log.info("Message status updated to SEEN for messageId: {}", messageId);
         } else {
             log.error("Invalid payload for seenMessage: {}", payload);
+
+            // Detailed logging to identify missing parts
+            if (messageId == null) {
+                log.error("messageId is missing in the payload.");
+            }
+            if (sessionId == null) {
+                log.error("sessionId is missing in the payload.");
+            }
         }
     }
 }

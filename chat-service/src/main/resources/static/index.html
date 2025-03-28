@@ -174,6 +174,7 @@
 
         if (messageContent && stompClient && username && name) {
             var chatMessage = {
+                id: generateUniqueId(),  // Ensure each message has a unique ID
                 sender: username,
                 content: messageContent,
                 messageType: 'CHAT',
@@ -284,7 +285,13 @@
 
     function sendSeenNotification(messageId) {
         if (stompClient) {
-            stompClient.send("/app/chat.seenMessage", {}, JSON.stringify({ messageId: messageId, sessionId: getSessionId() }));
+            const sessionId = getSessionId();
+            const payload = {
+                messageId: messageId,
+                sessionId: sessionId
+            };
+            stompClient.send("/app/chat.seenMessage", {}, JSON.stringify(payload));
+            console.log("Sent seen notification with payload: ", payload);
         }
     }
 
@@ -325,7 +332,6 @@
         }
         return colors[username];
     }
-
     const COLORS = [
         '#e21400', '#91580f', '#f8a700', '#f78b00',
         '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
@@ -341,6 +347,10 @@
         var hours = istTime.getUTCHours().toString().padStart(2, '0');
         var minutes = istTime.getUTCMinutes().toString().padStart(2, '0');
         return hours + ':' + minutes;
+    }
+
+    function generateUniqueId() {
+        return '_' + Math.random().toString(36).substr(2, 9);
     }
 </script>
 </body>

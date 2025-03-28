@@ -15,22 +15,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WebSocketEventListener {
 
-	@Autowired
-	private SimpMessageSendingOperations messagingTemplate;
+    @Autowired
+    private SimpMessageSendingOperations messagingTemplate;
 
-	@EventListener
-	public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
-		StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+    @EventListener
+    public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
+        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
 
-		String username = (String) headerAccessor.getSessionAttributes().get("username");
-		if (username != null) {
-			log.info("User Disconnected : " + username);
+        String username = (String) headerAccessor.getSessionAttributes().get("username");
+        if (username != null) {
+            log.info("User Disconnected : " + username);
 
-			ChatMessageRequest messageRequest = new ChatMessageRequest();
-			messageRequest.setMessageType(ChatMessageRequest.MessageType.LEAVE);
-			messageRequest.setSender(username);
+            ChatMessageRequest messageRequest = new ChatMessageRequest();
+            messageRequest.setMessageType(ChatMessageRequest.MessageType.LEAVE);
+            messageRequest.setSender(username);
 
-			messagingTemplate.convertAndSend("/topic/public", messageRequest);
-		}
-	}
+            messagingTemplate.convertAndSend("/topic/public", messageRequest);
+        }
+    }
 }
