@@ -1,213 +1,303 @@
 <!DOCTYPE html>
-<html>
-  <head>
-      <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0">
-      <title>Welcome to Spring Boot Chat Application</title>
-      <link rel="stylesheet" href="/css/main.css" />
-      <style>
-          .chat-message .nickname {
-              font-weight: bold;
-          }
-          .chat-message {
-              padding: 10px;
-              border-bottom: 1px solid #ddd;
-          }
-          .event-message {
-              padding: 10px;
-              font-style: italic;
-              color: #888;
-          }
-          /* Responsive styles */
-          @media (max-width: 600px) {
-              .chat-container {
-                  padding: 10px;
-              }
-              .chat-message {
-                  padding: 5px;
-              }
-              .event-message {
-                  padding: 5px;
-              }
-          }
-      </style>
-  </head>
-  <body>
-    <noscript>
-      <h2>Sorry! Your browser doesn't support Javascript</h2>
-    </noscript>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        .chat-message {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: flex-start;
+            position: relative;
+        }
+        .chat-message.self {
+            justify-content: flex-end;
+        }
+        .chat-message .nickname {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .chat-message.self .nickname {
+            display: none;
+        }
+        .event-message {
+            padding: 10px;
+            font-style: italic;
+            color: #888;
+            text-align: center;
+        }
+        .status {
+            font-size: 0.8em;
+            color: #888;
+            position: absolute;
+            bottom: -15px;
+            right: 10px;
+        }
+        .seen {
+            font-size: 0.8em;
+            color: #888;
+        }
+        @media (max-width: 600px) {
+            .chat-container {
+                padding: 10px;
+            }
+            .chat-message {
+                padding: 5px;
+            }
+            .event-message {
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<noscript>
+    <h2>Sorry! Your browser doesn't support Javascript</h2>
+</noscript>
 
-    <div id="username-page">
-        <div class="username-page-container">
-            <h1 class="title">Enter your details</h1>
-            <form id="usernameForm" name="usernameForm">
-                
-                <div class="form-group">
-                    <input type="text" id="name" placeholder="Name" autocomplete="off" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <input type="text" id="username" placeholder="Enter friend's email" autocomplete="off" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="accent username-submit">Start Chatting</button>
-                </div>
-            </form>
+<div id="username-page" class="username-page-container">
+    <h1 class="title">Enter your details</h1>
+    <form id="usernameForm" name="usernameForm">
+        <div class="form-group">
+            <input type="text" id="name" placeholder="Name" autocomplete="off" class="form-control">
         </div>
-    </div>
+        <div class="form-group">
+            <input type="email" id="username" placeholder="Enter your email" autocomplete="off" class="form-control">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="accent username-submit">Start Chatting</button>
+        </div>
+    </form>
+</div>
 
-    <div id="chat-page" class="hidden">
-        <div class="chat-container">
-            <div class="chat-header">
-                Boot Chat Application
-                <button id="leaveChat" class="leave-chat">Leave Chat</button>
+<div id="chat-page" class="hidden">
+    <div class="chat-container">
+        <div class="chat-header">
+            Boot Chat Application
+            <button id="leaveChat" class="leave-chat">Leave Chat</button>
+        </div>
+        <ul id="messageArea"></ul>
+        <form id="messageForm" name="messageForm">
+            <div class="form-group">
+                <div class="input-group clearfix">
+                    <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control">
+                    <button type="submit" class="primary">Send</button>
+                </div>
             </div>
-            <ul id="messageArea">
-
-            </ul>
-            <form id="messageForm" name="messageForm">
-                <div class="form-group">
-                    <div class="input-group clearfix">
-                        <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
-                        <button type="submit" class="primary">Send</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        </form>
     </div>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script>
-        var stompClient = null;
-        var colors = {};
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script>
+    var stompClient = null;
+    var colors = {};
+    var seenMessages = new Set();
 
-        document.querySelector('#usernameForm').addEventListener('submit', connect, true);
-        document.querySelector('#leaveChat').addEventListener('click', leaveChat, true);
-
-        function connect(event) {
-            event.preventDefault();
-            var username = document.querySelector('#username').value.trim();
-            var name = document.querySelector('#name').value.trim();
-
-            if(username && name) {
-                sessionStorage.setItem('username', username);
-                sessionStorage.setItem('name', name);
-
-                var messageRequest = {
-                    messageType: 'JOIN',
-                    sender: username,
-                    name: name
-                };
-
-                // Connect to WebSocket
-                var socket = new SockJS('/ws');
-                stompClient = Stomp.over(socket);
-
-                stompClient.connect({}, function(frame) {
-                    document.querySelector('#username-page').classList.add('hidden');
-                    document.querySelector('#chat-page').classList.remove('hidden');
-
-                    stompClient.send("/app/chat.addUser", {}, JSON.stringify(messageRequest));
-
-                    stompClient.subscribe('/topic/public', onMessageReceived);
-                });
-            }
+    document.addEventListener("DOMContentLoaded", function () {
+        if (sessionStorage.getItem('username') && sessionStorage.getItem('name')) {
+            connect();
+        } else {
+            document.querySelector('#username-page').classList.remove('hidden');
         }
+    });
 
-        function sendMessage(event) {
-            event.preventDefault();
-            var messageContent = document.querySelector('#message').value.trim();
-            var username = sessionStorage.getItem('username');
-            var name = sessionStorage.getItem('name');
+    document.querySelector('#usernameForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var username = document.querySelector('#username').value.trim();
+        var name = document.querySelector('#name').value.trim();
 
-            if (messageContent && stompClient && username && name) {
-                var chatMessage = {
-                    sender: username,
-                    content: messageContent,
-                    messageType: 'CHAT',
-                    name: name
-                };
-
-                stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
-                document.querySelector('#message').value = '';
-            }
+        if (username && name) {
+            sessionStorage.setItem('username', username);
+            sessionStorage.setItem('name', name);
+            connect();
         }
+    });
 
-        function leaveChat() {
-            var username = sessionStorage.getItem('username');
-            var name = sessionStorage.getItem('name');
+    document.querySelector('#leaveChat').addEventListener('click', leaveChat, true);
 
-            if (stompClient && username && name) {
-                var chatMessage = {
-                    sender: username,
-                    messageType: 'LEAVE',
-                    name: name
-                };
+    function connect() {
+        var username = sessionStorage.getItem('username');
+        var name = sessionStorage.getItem('name');
+        var sessionId = generateSessionId();
 
-                stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
-                stompClient.disconnect();
+        var messageRequest = {
+            messageType: 'JOIN',
+            sender: username,
+            name: name
+        };
 
-                document.querySelector('#chat-page').classList.add('hidden');
-                document.querySelector('#username-page').classList.remove('hidden');
+        // Update URL with sessionId
+        var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?sessionId=" + sessionId;
+        window.history.pushState({ path: newUrl }, '', newUrl);
 
-                // Clear session storage
-                sessionStorage.removeItem('username');
-                sessionStorage.removeItem('name');
-            }
-        }
+        // Connect to WebSocket
+        var socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
 
-        function onMessageReceived(payload) {
-            var message = JSON.parse(payload.body);
+        stompClient.connect({}, function (frame) {
+            document.querySelector('#username-page').classList.add('hidden');
+            document.querySelector('#chat-page').classList.remove('hidden');
 
+            stompClient.send("/app/chat.addUser", {}, JSON.stringify(messageRequest));
+
+            stompClient.subscribe('/topic/public', onMessageReceived);
+            stompClient.subscribe('/topic/seen', onMessageSeen);
+        });
+    }
+
+    function generateSessionId() {
+        return '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    function sendMessage(event) {
+        event.preventDefault();
+        var messageContent = document.querySelector('#message').value.trim();
+        var username = sessionStorage.getItem('username');
+        var name = sessionStorage.getItem('name');
+
+        if (messageContent && stompClient && username && name) {
+            var chatMessage = {
+                sender: username,
+                content: messageContent,
+                messageType: 'CHAT',
+                name: name
+            };
+
+            stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+            document.querySelector('#message').value = '';
+
+            // Display 'sent' status
             var messageElement = document.createElement('li');
+            messageElement.classList.add('chat-message', 'self');
+            var textElement = document.createElement('span');
+            var messageText = document.createTextNode(messageContent);
+            textElement.appendChild(messageText);
+            messageElement.appendChild(textElement);
+            var statusElement = document.createElement('span');
+            statusElement.classList.add('status');
+            statusElement.textContent = 'Sent';
+            messageElement.appendChild(statusElement);
+            document.querySelector('#messageArea').appendChild(messageElement);
+            document.querySelector('#messageArea').scrollTop = document.querySelector('#messageArea').scrollHeight;
+        }
+    }
 
-            if (message.messageType === 'JOIN') {
-                messageElement.classList.add('event-message');
-                message.content = message.name + ' joined!';
-            } else if (message.messageType === 'LEAVE') {
-                messageElement.classList.add('event-message');
-                message.content = (message.name) + ' left!';
+    function leaveChat() {
+        var username = sessionStorage.getItem('username');
+        var name = sessionStorage.getItem('name');
+
+        if (stompClient && username && name) {
+            var chatMessage = {
+                sender: username,
+                messageType: 'LEAVE',
+                name: name
+            };
+
+            stompClient.send("/app/chat.removeUser", {}, JSON.stringify(chatMessage));
+            stompClient.disconnect();
+
+            document.querySelector('#chat-page').classList.add('hidden');
+            document.querySelector('#username-page').classList.remove('hidden');
+
+            // Clear session storage
+            sessionStorage.removeItem('username');
+            sessionStorage.removeItem('name');
+        }
+    }
+
+    function onMessageReceived(payload) {
+        var message = JSON.parse(payload.body);
+        var username = sessionStorage.getItem('username');
+
+        var messageElement = document.createElement('li');
+
+        if (message.messageType === 'JOIN') {
+            messageElement.classList.add('event-message');
+            message.content = message.name + ' joined!';
+        } else if (message.messageType === 'LEAVE') {
+            messageElement.classList.add('event-message');
+            message.content = message.name + ' left!';
+        } else {
+            messageElement.classList.add('chat-message');
+            if (message.sender === username) {
+                // Do not display the message again for the sender
+                return;
             } else {
-                messageElement.classList.add('chat-message');
-
                 var usernameElement = document.createElement('strong');
                 usernameElement.classList.add('nickname');
                 var usernameText = document.createTextNode(message.name);
                 usernameElement.appendChild(usernameText);
-
                 usernameElement.style.color = getUsernameColor(message.sender);
-
                 messageElement.appendChild(usernameElement);
+                sendSeenNotification(message.id);
             }
-
-            var textElement = document.createElement('span');
-            var messageText = document.createTextNode(': ' + message.content);
-            textElement.appendChild(messageText);
-
-            messageElement.appendChild(textElement);
-
-            document.querySelector('#messageArea').appendChild(messageElement);
-            document.querySelector('#messageArea').scrollTop = document.querySelector('#messageArea').scrollHeight;
         }
 
-        function getUsernameColor(username) {
-            if (!colors[username]) {
-                var hash = 0;
-                for (var i = 0; i < username.length; i++) {
-                    hash = 31 * hash + username.charCodeAt(i);
-                }
-                var index = Math.abs(hash % COLORS.length);
-                colors[username] = COLORS[index];
-            }
-            return colors[username];
+        var textElement = document.createElement('span');
+        var messageText = document.createTextNode(message.content);
+        textElement.appendChild(messageText);
+
+        messageElement.appendChild(textElement);
+
+        document.querySelector('#messageArea').appendChild(messageElement);
+        document.querySelector('#messageArea').scrollTop = document.querySelector('#messageArea').scrollHeight;
+    }
+
+    function createSeenElement(messageId) {
+        var seenElement = document.createElement('span');
+        seenElement.classList.add('seen');
+        seenElement.id = 'seen-' + messageId;
+        seenElement.textContent = 'Seen';
+        seenElement.style.display = 'none';
+        return seenElement;
+    }
+
+    function sendSeenNotification(messageId) {
+        if (stompClient) {
+            stompClient.send("/app/chat.seenMessage", {}, JSON.stringify({ messageId: messageId, sessionId: getSessionId() }));
         }
+    }
 
-        const COLORS = [
-            '#e21400', '#91580f', '#f8a700', '#f78b00',
-            '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
-            '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
-        ];
+    function onMessageSeen(payload) {
+        var message = JSON.parse(payload.body);
+        var seenElement = document.getElementById('seen-' + message.messageId);
+        if (seenElement) {
+            seenElement.style.display = 'inline';
+            setTimeout(() => {
+                seenElement.style.display = 'none';
+            }, 2000); // Hide "seen" status after 2 seconds
+        }
+    }
 
-        document.querySelector('#messageForm').addEventListener('submit', sendMessage, true);
-    </script>
-  </body>
+    function getSessionId() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('sessionId');
+    }
+
+    function getUsernameColor(username) {
+        if (!colors[username]) {
+            var hash = 0;
+            for (var i = 0; i < username.length; i++) {
+                hash = 31 * hash + username.charCodeAt(i);
+            }
+            var index = Math.abs(hash % COLORS.length);
+            colors[username] = COLORS[index];
+        }
+        return colors[username];
+    }
+
+    const COLORS = [
+        '#e21400', '#91580f', '#f8a700', '#f78b00',
+        '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
+        '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
+    ];
+
+    document.querySelector('#messageForm').addEventListener('submit', sendMessage, true);
+</script>
+</body>
 </html>
