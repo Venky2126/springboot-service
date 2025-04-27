@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | SocialPost</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5649c7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --success: #00b894;
+            --error: #d63031;
+            --warning: #fdcb6e;
+            --gray: #636e72;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--dark);
+        }
+
+        .container {
+            position: relative;
+            max-width: 500px;
+            width: 100%;
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: skewX(-15deg);
+            transition: 0.5s;
+        }
+
+        .container:hover::before {
+            left: 150%;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .title {
+            text-align: center;
+            color: var(--dark);
+            margin-bottom: 30px;
+            position: relative;
+            font-weight: 600;
+        }
+
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        .input-group label {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: var(--gray);
+            font-weight: 400;
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+
+        .input-group input:focus+label,
+        .input-group input:valid+label,
+        .input-group textarea:focus+label,
+        .input-group textarea:valid+label {
+            top: -10px;
+            left: 10px;
+            font-size: 12px;
+            background: #fff;
+            padding: 0 5px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+            color: var(--primary-dark);
+        }
+
+        .message-popup {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            color: var(--dark);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 16px;
+            z-index: 9999;
+            animation: slideIn 0.3s ease-out forwards;
+            border-left: 5px solid var(--primary);
+        }
+
+        .message-popup.success {
+            border-left-color: var(--success);
+        }
+
+        .message-popup.error {
+            border-left-color: var(--error);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .requirements {
+            margin-top: 5px;
+            font-size: 12px;
+            color: var(--gray);
+            display: none;
+        }
+
+        .requirements.show {
+            display: block;
+        }
+
+        .requirement {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3px;
+        }
+
+        .requirement i {
+            margin-right: 5px;
+            font-size: 10px;
+        }
+
+        .requirement.valid {
+            color: var(--success);
+        }
+
+        .requirement.invalid {
+            color: var(--error);
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container animate__animated animate__fadeInUp">
+        <div class="logo">
+            <i class="fas fa-users"></i>
+        </div>
+        <h1 class="title">Create Your Account</h1>
+        <form id="registrationForm" th:action="@{/add}" method="post">
+            
+            <div class="input-group">
+                <input type="text" id="username" name="username" required 
+                       minlength="4" maxlength="20" pattern="[a-zA-Z0-9]+"
+                       title="4-20 alphanumeric characters">
+                <label for="username">Username</label>
+            </div>
+
+            <div class="input-group password-container">
+                <input type="password" id="password" name="password" required 
+                       minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$"
+                       title="Must contain uppercase, lowercase, and number">
+                <label for="password">Password</label>
+                <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+                <div class="requirements" id="passwordRequirements">
+                    <div class="requirement" id="lengthReq">
+                        <i class="fas fa-circle"></i>
+                        <span>At least 8 characters</span>
+                    </div>
+                    <div class="requirement" id="upperReq">
+                        <i class="fas fa-circle"></i>
+                        <span>At least one uppercase letter</span>
+                    </div>
+                    <div class="requirement" id="lowerReq">
+                        <i class="fas fa-circle"></i>
+                        <span>At least one lowercase letter</span>
+                    </div>
+                    <div class="requirement" id="numberReq">
+                        <i class="fas fa-circle"></i>
+                        <span>At least one number</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="email" name="email" required
+                       title="Please enter a valid email address">
+                <label for="email">Email</label>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="displayName" name="displayName" maxlength="30"
+                       title="Maximum 30 characters">
+                <label for="displayName">Display Name (Optional)</label>
+            </div>
+
+            <div class="input-group">
+                <textarea id="bio" name="bio" rows="3" maxlength="150"
+                          title="Maximum 150 characters"></textarea>
+                <label for="bio">Bio (Optional, max 150 chars)</label>
+            </div>
+
+            <button type="submit" class="btn">
+                <i class="fas fa-user-plus"></i>
+                Register Now
+            </button>
+        </form>
+
+        <p class="login-link">Already have an account? <a th:href="@{/}">Sign In</a></p>
+    </div>
+
+    <script>
+        // DOM Elements
+        const dom = {
+            form: document.getElementById('registrationForm'),
+            password: document.getElementById('password'),
+            togglePassword: document.getElementById('togglePassword'),
+            passwordRequirements: document.getElementById('passwordRequirements')
+        };
+
+        // Password requirements elements
+        const requirements = {
+            length: document.getElementById('lengthReq'),
+            upper: document.getElementById('upperReq'),
+            lower: document.getElementById('lowerReq'),
+            number: document.getElementById('numberReq')
+        };
+
+        // Initialize the application
+        function init() {
+            setupEventListeners();
+        }
+
+        // Set up all event listeners
+        function setupEventListeners() {
+            // Password visibility toggle
+            dom.togglePassword.addEventListener('click', togglePasswordVisibility);
+            
+            // Password validation
+            dom.password.addEventListener('focus', showPasswordRequirements);
+            dom.password.addEventListener('blur', hidePasswordRequirementsIfEmpty);
+            dom.password.addEventListener('input', validatePassword);
+            
+            // Form submission
+            dom.form.addEventListener('submit', handleFormSubmission);
+        }
+
+        // Toggle password visibility
+        function togglePasswordVisibility() {
+            const type = dom.password.getAttribute('type') === 'password' ? 'text' : 'password';
+            dom.password.setAttribute('type', type);
+            dom.togglePassword.classList.toggle('fa-eye');
+            dom.togglePassword.classList.toggle('fa-eye-slash');
+        }
+
+        // Show password requirements
+        function showPasswordRequirements() {
+            dom.passwordRequirements.style.display = 'block';
+        }
+
+        // Hide password requirements if empty
+        function hidePasswordRequirementsIfEmpty() {
+            if (!dom.password.value) {
+                dom.passwordRequirements.style.display = 'none';
+            }
+        }
+
+        // Validate password against requirements
+        function validatePassword() {
+            const value = dom.password.value;
+            
+            updateRequirementClass(requirements.length, value.length >= 8);
+            updateRequirementClass(requirements.upper, /[A-Z]/.test(value));
+            updateRequirementClass(requirements.lower, /[a-z]/.test(value));
+            updateRequirementClass(requirements.number, /[0-9]/.test(value));
+        }
+
+        // Update requirement class based on validation
+        function updateRequirementClass(element, isValid) {
+            element.className = isValid ? 'requirement valid' : 'requirement invalid';
+        }
+
+        // Handle form submission
+        async function handleFormSubmission(event) {
+            event.preventDefault();
+            
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(dom.form);
+                const data = Object.fromEntries(formData.entries());
+                
+                const response = await fetch(dom.form.action, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    if (result.success) {
+                        showMessage('Registration successful! Redirecting to login...', 'success');
+                        setTimeout(() => {
+                            window.location.href = '/';
+                        }, 2000);
+                    }
+                } else {
+                    showMessage(result.error || 'An error occurred. Please try again.', 'error');
+                }
+            } catch (error) {
+                showMessage('Network error. Please check your connection.', 'error');
+                console.error('Registration error:', error);
+            } finally {
+                // Reset button state
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Show message popup
+        function showMessage(message, type = 'success') {
+            // Remove existing popup if any
+            const existingPopup = document.querySelector('.message-popup');
+            if (existingPopup) {
+                existingPopup.remove();
+            }
+
+            // Create new popup
+            const messagePopup = document.createElement('div');
+            messagePopup.className = `message-popup ${type}`;
+            messagePopup.textContent = message;
+            document.body.appendChild(messagePopup);
+
+            // Auto-remove after delay
+            setTimeout(() => {
+                messagePopup.style.animation = 'slideOut 0.3s ease-out forwards';
+                setTimeout(() => messagePopup.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
