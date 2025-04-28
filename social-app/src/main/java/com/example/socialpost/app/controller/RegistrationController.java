@@ -47,9 +47,9 @@ public class RegistrationController {
     }
     
     //http://localhost:8080/welcome
-    @GetMapping("/welcome")
+    @GetMapping("/feed")
     public String showWelcomeForm(Model model) {
-        return "welcome";
+        return "feed";
     }
 
     @PostMapping("/add")
@@ -106,7 +106,7 @@ public class RegistrationController {
             // Prepare success response
             response.put("success", true);
             response.put("message", "Registration successful");
-            response.put("userId", savedUser.getId());
+            response.put("userId", savedUser.getUseId());
             
             return ResponseEntity.ok(response);
 
