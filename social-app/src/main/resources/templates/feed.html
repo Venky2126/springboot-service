@@ -4,67 +4,244 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Feed</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #1877f2;
+            --secondary-color: #f0f2f5;
+            --post-border-radius: 10px;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
+            background-color: var(--secondary-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
         .post-form {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            background: white;
+            border-radius: var(--post-border-radius);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
-        .post {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+        
+        .post-card {
+            background: white;
+            border-radius: var(--post-border-radius);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
-        .post img {
-            max-width: 100%;
-            margin-top: 10px;
+        
+        .post-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .post-image {
+            border-radius: var(--post-border-radius);
+            max-height: 500px;
+            object-fit: contain;
+        }
+        
+        .post-actions {
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .action-btn {
+            transition: all 0.2s;
+        }
+        
+        .action-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .file-upload-label {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .file-upload-label:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            
+            .post-image {
+                max-height: 300px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Social Feed</h1>
-    
-    <!-- Post Creation Form -->
-    <div class="post-form">
-        <h3>Create Post</h3>
-        <textarea id="postContent" placeholder="What's on your mind?" rows="3" style="width: 100%;"></textarea>
-        <input type="file" id="postImage" accept="image/*">
-        <button onclick="createPost()">Post</button>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-users me-2"></i>SocialFeed
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-user me-1"></i> Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Post Creation Form -->
+                <div class="post-form p-3 mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://via.placeholder.com/40" class="user-avatar me-2" alt="User">
+                        <input type="text" id="postContent" class="form-control" placeholder="What's on your mind?">
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <label for="postImage" class="file-upload-label btn btn-sm btn-outline-secondary me-2">
+                                <i class="fas fa-image text-primary me-1"></i> Photo
+                            </label>
+                            <input type="file" id="postImage" accept="image/*" class="d-none">
+                        </div>
+                        <button onclick="createPost()" class="btn btn-primary px-4">
+                            <i class="fas fa-paper-plane me-1"></i> Post
+                        </button>
+                    </div>
+                    
+                    <div class="mt-2" id="imagePreviewContainer"></div>
+                </div>
+                
+                <!-- Posts Feed -->
+                <div id="postsContainer" class="mb-4"></div>
+                
+                <!-- Loading Spinner -->
+                <div id="loadingSpinner" class="text-center my-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <!-- Posts Feed -->
-    <div id="postsContainer"></div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
         // Load posts when page loads
-        document.addEventListener('DOMContentLoaded', loadPosts);
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPosts();
+            
+            // Preview image before upload
+            document.getElementById('postImage').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const previewContainer = document.getElementById('imagePreviewContainer');
+                        previewContainer.innerHTML = `
+                            <div class="position-relative">
+                                <img src="${event.target.result}" class="img-fluid rounded mt-2" style="max-height: 200px;">
+                                <button class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1" 
+                                        onclick="document.getElementById('imagePreviewContainer').innerHTML = ''; document.getElementById('postImage').value = '';">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        `;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
         
         // Fetch all posts
         async function loadPosts() {
-            const response = await fetch('/api/posts');
-            const posts = await response.json();
-            
-            const container = document.getElementById('postsContainer');
-            container.innerHTML = '';
-            
-            posts.forEach(post => {
-                const postDiv = document.createElement('div');
-                postDiv.className = 'post';
-                postDiv.innerHTML = `
-                    <p>${post.content || ''}</p>
-                    ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Post image">` : ''}
-                    <small>Posted at: ${new Date(post.createdAt).toLocaleString()}</small>
-                `;
-                container.appendChild(postDiv);
-            });
+            try {
+                document.getElementById('loadingSpinner').style.display = 'block';
+                const response = await fetch('/api/posts');
+                const posts = await response.json();
+                
+                const container = document.getElementById('postsContainer');
+                container.innerHTML = '';
+                
+                if (posts.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center py-5 text-muted">
+                            <i class="fas fa-comment-slash fa-3x mb-3"></i>
+                            <h5>No posts yet</h5>
+                            <p>Be the first to share something!</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                posts.forEach(post => {
+                    const postDiv = document.createElement('div');
+                    postDiv.className = 'post-card p-3 mb-3';
+                    postDiv.innerHTML = `
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://via.placeholder.com/40" class="user-avatar me-2" alt="User">
+                            <div>
+                                <h6 class="mb-0">${post.user?.displayName || 'Anonymous'}</h6>
+                                <small class="text-muted">${formatPostTime(post.createdAt)}</small>
+                            </div>
+                        </div>
+                        
+                        <p class="mb-3">${post.content || ''}</p>
+                        
+                        ${post.imageUrl ? `
+                            <div class="mb-3">
+                                <img src="${post.imageUrl}" class="post-image img-fluid w-100" alt="Post image">
+                            </div>
+                        ` : ''}
+                        
+                        <div class="post-actions d-flex justify-content-around py-2 mb-2">
+                            <button class="action-btn btn btn-sm w-100">
+                                <i class="far fa-thumbs-up me-1"></i> Like
+                            </button>
+                            <button class="action-btn btn btn-sm w-100">
+                                <i class="far fa-comment me-1"></i> Comment
+                            </button>
+                            <button class="action-btn btn btn-sm w-100">
+                                <i class="fas fa-share me-1"></i> Share
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(postDiv);
+                });
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                showAlert('Failed to load posts', 'danger');
+            } finally {
+                document.getElementById('loadingSpinner').style.display = 'none';
+            }
         }
         
         // Create new post
@@ -72,23 +249,61 @@
             const content = document.getElementById('postContent').value;
             const imageFile = document.getElementById('postImage').files[0];
             
+            if (!content && !imageFile) {
+                showAlert('Please add text or an image to post', 'warning');
+                return;
+            }
+            
             const formData = new FormData();
             if (content) formData.append('content', content);
             if (imageFile) formData.append('image', imageFile);
             
             try {
-                await fetch('/api/posts', {
+                const response = await fetch('/api/posts', {
                     method: 'POST',
                     body: formData
                 });
                 
+                if (!response.ok) throw new Error('Post failed');
+                
                 // Clear form and reload posts
                 document.getElementById('postContent').value = '';
                 document.getElementById('postImage').value = '';
+                document.getElementById('imagePreviewContainer').innerHTML = '';
                 loadPosts();
+                
+                showAlert('Post created successfully!', 'success');
             } catch (error) {
                 console.error('Error creating post:', error);
+                showAlert('Failed to create post', 'danger');
             }
+        }
+        
+        // Helper function to format post time
+        function formatPostTime(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
+        // Helper function to show alerts
+        function showAlert(message, type) {
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 end-0 m-3`;
+            alert.style.zIndex = '1000';
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 3000);
         }
     </script>
 </body>
