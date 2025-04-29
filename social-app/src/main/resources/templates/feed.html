@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,81 +15,82 @@
             --secondary-color: #f0f2f5;
             --post-border-radius: 10px;
         }
-        
+
         body {
             background-color: var(--secondary-color);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         .navbar-brand {
             font-weight: bold;
             color: var(--primary-color);
         }
-        
+
         .post-form {
             background: white;
             border-radius: var(--post-border-radius);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
-        
+
         .post-card {
             background: white;
             border-radius: var(--post-border-radius);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s;
         }
-        
+
         .post-card:hover {
             transform: translateY(-2px);
         }
-        
+
         .post-image {
             border-radius: var(--post-border-radius);
             max-height: 500px;
             object-fit: contain;
         }
-        
+
         .post-actions {
             border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
         }
-        
+
         .action-btn {
             transition: all 0.2s;
         }
-        
+
         .action-btn:hover {
             background-color: var(--secondary-color);
         }
-        
+
         .user-avatar {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             object-fit: cover;
         }
-        
+
         .file-upload-label {
             cursor: pointer;
             transition: all 0.2s;
         }
-        
+
         .file-upload-label:hover {
             background-color: var(--secondary-color);
         }
-        
+
         @media (max-width: 768px) {
             .container {
                 padding-left: 10px;
                 padding-right: 10px;
             }
-            
+
             .post-image {
                 max-height: 300px;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
@@ -119,10 +121,10 @@
                 <!-- Post Creation Form -->
                 <div class="post-form p-3 mb-4">
                     <div class="d-flex align-items-center mb-3">
-                        <img src="https://via.placeholder.com/40" class="user-avatar me-2" alt="User">
+                        <img src="https://i.pravatar.cc/40?img=5" class="user-avatar me-2" alt="User">
                         <input type="text" id="postContent" class="form-control" placeholder="What's on your mind?">
                     </div>
-                    
+
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <label for="postImage" class="file-upload-label btn btn-sm btn-outline-secondary me-2">
@@ -134,13 +136,13 @@
                             <i class="fas fa-paper-plane me-1"></i> Post
                         </button>
                     </div>
-                    
+
                     <div class="mt-2" id="imagePreviewContainer"></div>
                 </div>
-                
+
                 <!-- Posts Feed -->
                 <div id="postsContainer" class="mb-4"></div>
-                
+
                 <!-- Loading Spinner -->
                 <div id="loadingSpinner" class="text-center my-4">
                     <div class="spinner-border text-primary" role="status">
@@ -153,18 +155,18 @@
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
         // Load posts when page loads
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             loadPosts();
-            
+
             // Preview image before upload
-            document.getElementById('postImage').addEventListener('change', function(e) {
+            document.getElementById('postImage').addEventListener('change', function (e) {
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
-                    reader.onload = function(event) {
+                    reader.onload = function (event) {
                         const previewContainer = document.getElementById('imagePreviewContainer');
                         previewContainer.innerHTML = `
                             <div class="position-relative">
@@ -180,17 +182,17 @@
                 }
             });
         });
-        
+
         // Fetch all posts
         async function loadPosts() {
             try {
                 document.getElementById('loadingSpinner').style.display = 'block';
                 const response = await fetch('/api/posts');
                 const posts = await response.json();
-                
+
                 const container = document.getElementById('postsContainer');
                 container.innerHTML = '';
-                
+
                 if (posts.length === 0) {
                     container.innerHTML = `
                         <div class="text-center py-5 text-muted">
@@ -201,15 +203,15 @@
                     `;
                     return;
                 }
-                
+
                 posts.forEach(post => {
                     const postDiv = document.createElement('div');
                     postDiv.className = 'post-card p-3 mb-3';
                     postDiv.innerHTML = `
                         <div class="d-flex align-items-center mb-3">
-                            <img src="https://via.placeholder.com/40" class="user-avatar me-2" alt="User">
+                            <img src="https://i.pravatar.cc/40?img=5" class="user-avatar me-2" alt="User">
                             <div>
-                                <h6 class="mb-0">${post.user?.displayName || 'Anonymous'}</h6>
+                                <h6 class="mb-0">${post.user?.displayName || 'Radha'}</h6>
                                 <small class="text-muted">${formatPostTime(post.createdAt)}</small>
                             </div>
                         </div>
@@ -221,18 +223,7 @@
                                 <img src="${post.imageUrl}" class="post-image img-fluid w-100" alt="Post image">
                             </div>
                         ` : ''}
-                        
-                        <div class="post-actions d-flex justify-content-around py-2 mb-2">
-                            <button class="action-btn btn btn-sm w-100">
-                                <i class="far fa-thumbs-up me-1"></i> Like
-                            </button>
-                            <button class="action-btn btn btn-sm w-100">
-                                <i class="far fa-comment me-1"></i> Comment
-                            </button>
-                            <button class="action-btn btn btn-sm w-100">
-                                <i class="fas fa-share me-1"></i> Share
-                            </button>
-                        </div>
+               
                     `;
                     container.appendChild(postDiv);
                 });
@@ -243,42 +234,42 @@
                 document.getElementById('loadingSpinner').style.display = 'none';
             }
         }
-        
+
         // Create new post
         async function createPost() {
             const content = document.getElementById('postContent').value;
             const imageFile = document.getElementById('postImage').files[0];
-            
+
             if (!content && !imageFile) {
                 showAlert('Please add text or an image to post', 'warning');
                 return;
             }
-            
+
             const formData = new FormData();
             if (content) formData.append('content', content);
             if (imageFile) formData.append('image', imageFile);
-            
+
             try {
                 const response = await fetch('/api/posts', {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 if (!response.ok) throw new Error('Post failed');
-                
+
                 // Clear form and reload posts
                 document.getElementById('postContent').value = '';
                 document.getElementById('postImage').value = '';
                 document.getElementById('imagePreviewContainer').innerHTML = '';
                 loadPosts();
-                
+
                 showAlert('Post created successfully!', 'success');
             } catch (error) {
                 console.error('Error creating post:', error);
                 showAlert('Failed to create post', 'danger');
             }
         }
-        
+
         // Helper function to format post time
         function formatPostTime(dateString) {
             const date = new Date(dateString);
@@ -289,7 +280,7 @@
                 minute: '2-digit'
             });
         }
-        
+
         // Helper function to show alerts
         function showAlert(message, type) {
             const alert = document.createElement('div');
@@ -300,11 +291,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             `;
             document.body.appendChild(alert);
-            
+
             setTimeout(() => {
                 alert.remove();
             }, 3000);
         }
     </script>
 </body>
+
 </html>
