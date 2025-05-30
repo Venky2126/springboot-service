@@ -1,0 +1,2539 @@
+{
+	"info": {
+		"_postman_id": "887d569e-41f8-49a8-bec3-3b6fb6d9c349",
+		"name": "VENKAT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16472254"
+	},
+	"item": [
+		{
+			"name": "user-role-service",
+			"item": [
+				{
+					"name": "user/create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n  \"userName\": \"johnDoe\",\r\n  \"lastName\": \"Doe\"\r\n \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "role/create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roleName\": \"admin_role\",\r\n    \"description\": \"Greetings_role\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/role",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2000/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "flipkart-service",
+			"item": [
+				{
+					"name": "file-processing",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "IBM",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "{{$guid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"input_file_name\": \"Hello.txt\",\r\n    \"file_location\": \"/service/\",\r\n    \"refernce_number\": \"9876543234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8006/flipkart-service/api/v1/file-processing",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8006",
+							"path": [
+								"flipkart-service",
+								"api",
+								"v1",
+								"file-processing"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ibm-mq",
+			"item": [
+				{
+					"name": "local-ibm-mq-rest",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "IBM",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "{{$guid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hima\",\r\n    \"location\": \"Banglore\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"age\": 12,\r\n    \"gender\": \"Male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/ibm-mq/api/v1/customer/rest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"ibm-mq",
+								"api",
+								"v1",
+								"customer",
+								"rest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "boot-mail",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "IBM"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST"
+							},
+							{
+								"key": "transaction_id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hima\",\r\n    \"location\": \"Banglore\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"age\": 12,\r\n    \"gender\": \"Male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/ibm-mq/api/v1/customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"ibm-mq",
+								"api",
+								"v1",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aws-ibm-mq-private",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "IBM"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST"
+							},
+							{
+								"key": "transaction_id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hima\",\r\n    \"location\": \"Banglore\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"age\": 12,\r\n    \"gender\": \"Male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://172.31.45.113:8004/ibm-mq/api/v1/customer",
+							"protocol": "http",
+							"host": [
+								"172",
+								"31",
+								"45",
+								"113"
+							],
+							"port": "8004",
+							"path": [
+								"ibm-mq",
+								"api",
+								"v1",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "aws-ibm-mq-public-200",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "TCS"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST"
+							},
+							{
+								"key": "transaction_id",
+								"value": "{{$guid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Devi\",\r\n    \"location\": \"Banglore\",\r\n    \"email\": \"devi@gmail.com\",\r\n    \"age\": 26,\r\n    \"gender\": \"Female\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.109.185.224:8004/ibm-mq/api/v1/customer",
+							"protocol": "http",
+							"host": [
+								"3",
+								"109",
+								"185",
+								"224"
+							],
+							"port": "8004",
+							"path": [
+								"ibm-mq",
+								"api",
+								"v1",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "local-ibm-mq",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "IBM",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "{{$guid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hima\",\r\n    \"location\": \"Banglore\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"age\": 12,\r\n    \"gender\": \"Male\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/ibm-mq/api/v1/customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"ibm-mq",
+								"api",
+								"v1",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user-service",
+			"item": [
+				{
+					"name": "attachement=send-html-email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/send-html-email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"send-html-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-service/api/wish",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"tech.venkat26@gmail.com\",\r\n    \"to\": \"tech.venkat21@gmail.com\",\r\n    \"subject\": \"Wish | Greetings\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/user-service/api/wish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"user-service",
+								"api",
+								"wish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-service/v1/user-balaji",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"salution\": \"Mr\",\r\n    \"first_name\": \"Balaji\",\r\n    \"last_name\": \"balaji\",\r\n    \"dob\": \"1990-12-03\",\r\n    \"email_id\": \"balaji.pichuka04@gmail.com\",\r\n    \"gender\": \"M\",\r\n    \"contact_number\": \"987654321\",\r\n    \"location\": \"Bangalore\",\r\n    \"mail_from\":\"tech.venkat26@gmail.com\",\r\n    \"subject\":\"Wish | Greetings\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/user-service/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"user-service",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-service/v1/user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"salution\": \"Mr\",\r\n    \"first_name\": \"Venkat\",\r\n    \"last_name\": \"Dasari\",\r\n    \"dob\": \"1995-12-03\",\r\n    \"email_id\": \"tech.venkat21@gmail.com\",\r\n    \"gender\": \"M\",\r\n    \"contact_number\": \"7997227679\",\r\n    \"location\": \"Hydrabad\",\r\n    \"mail_from\":\"tech.venkat26@gmail.com\",\r\n    \"subject\":\"Wish | Greetings\",\r\n    \"sender_user_name\":\"Venky Dasari\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/user-service/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"user-service",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-service/test/names",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"tech.venkat26@gmail.com\",\r\n    \"to\": \"tech.venkat21@gmail.com\",\r\n    \"subject\": \"Wish | Greetings\",\r\n    \"to_name\":\"Hey Krishna\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/user-service/test/names",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"user-service",
+								"test",
+								"names"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-service/test/wish",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"tech.venkat26@gmail.com\",\r\n    \"to\": \"tech.venkat21@gmail.com\",\r\n    \"subject\": \"Wish | Greetings\",\r\n    \"to_name\":\"Drupadhi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/user-service/test/wish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"user-service",
+								"test",
+								"wish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mail-service/api/wish",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"tech.venkat26@gmail.com\",\r\n    \"to\": \"tech.venkat21@gmail.com\",\r\n    \"subject\": \"Wish | Greetings\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mail-service/api/wish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mail-service",
+								"api",
+								"wish"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "registration-service",
+			"item": [
+				{
+					"name": "customer/add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"name\": \"ABB\",\r\n    \"location\": \"HYD\",\r\n    \"dob\": \"1-2-1999\",\r\n    \"contact_number\": \"98765432\",\r\n    \"email_id\": \"tech@gamil.com\",\r\n    \"occupation\": \"IT\",\r\n    \"marital_status\": \"YES\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/registration-service/api/customer/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"registration-service",
+								"api",
+								"customer",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customer/add -valid",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"name\": null,\r\n    \"location\": \"HYD\",\r\n    \"dob\": \"1-2-1999\",\r\n    \"contact_number\": \"98765432\",\r\n    \"email_id\": \"tech@gamil.com\",\r\n    \"occupation\": \"IT\",\r\n    \"marital_status\": \"YES\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/registration-service/api/customer/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"registration-service",
+								"api",
+								"customer",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customer/create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"RadhaKrishna\",\r\n    \"location\": \"Gokulam\",\r\n    \"dob\": \"1-1-1\",\r\n    \"contact_number\": \"98765432\",\r\n    \"email_id\": \"RadhaKrishna@gamil.com\",\r\n    \"occupation\": \"IT\",\r\n    \"marital_status\": \"YES\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/registration-service/api/customer/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"registration-service",
+								"api",
+								"customer",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/customer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/registration-service/api/customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"registration-service",
+								"api",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/customer/id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/registration-service/api/customer/152",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"registration-service",
+								"api",
+								"customer",
+								"152"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"name\": \"RadhaKrishna\",\r\n    \"location\": \"Vykuntam\",\r\n    \"dob\": \"1-2-1999\",\r\n    \"contact_number\": \"98765432\",\r\n    \"email_id\": \"tech@gamil.com\",\r\n    \"occupation\": \"IT\",\r\n    \"marital_status\": \"YES\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/registration-service/api/customer/upadte/152",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"registration-service",
+								"api",
+								"customer",
+								"upadte",
+								"152"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete/id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/registration-service/api/customer/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"registration-service",
+								"api",
+								"customer",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-all",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/registration-service/api/customer/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"registration-service",
+								"api",
+								"customer",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "file-message-service",
+			"item": [
+				{
+					"name": "/file-processing",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"file_name\": \"java.txt\",\r\n    \"file_location\": \"/state/\",\r\n    \"message\": \"welcome message\",\r\n    \"refernce_number\": \"9876543234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8006/file-message-service/api/file-processing",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8006",
+							"path": [
+								"file-message-service",
+								"api",
+								"file-processing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "file-create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"file_name\": \"input.txt\",\r\n    \"location\": \"HYD\",\r\n    \"message\": \"1-2-1999\",\r\n    \"refernce_number\": \"98765432\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8006/file-message-service/api/file-create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8006",
+							"path": [
+								"file-message-service",
+								"api",
+								"file-create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "kafka",
+			"item": [
+				{
+					"name": "json-message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"firstName\": \"Dasari\",\r\n    \"lastName\": \"Venkat\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/kafka-schema-segistry/api/json/publish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"kafka-schema-segistry",
+								"api",
+								"json",
+								"publish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order-service/api/order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Laptop\",\r\n    \"quantity\": 1,\r\n    \"price\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4002/order-service/api/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4002",
+							"path": [
+								"order-service",
+								"api",
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "encrypt-decrypt-service",
+			"item": [
+				{
+					"name": "create-key",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"name\": \"ABB\",\r\n    \"location\": \"HYD\",\r\n    \"dob\": \"1-2-1999\",\r\n    \"contact_number\": \"98765432\",\r\n    \"email_id\": \"tech@gamil.com\",\r\n    \"occupation\": \"IT\",\r\n    \"marital_status\": \"YES\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8008/encrypt-decrypt-service/api/create-key",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"encrypt-decrypt-service",
+								"api",
+								"create-key"
+							]
+						},
+						"description": "### Create Key API\n\nThis API endpoint makes an HTTP GET request to create a key for encryption and decryption.\n\n#### Response\n\nThe response for this request is expected to be in JSON format, but the last execution returned a response with the following details:\n\n- Status: 200\n    \n- Content-Type: text/xml\n    \n- Response Body: null\n    \n\nAs per the user's request, the response should be documented as a JSON schema. However, since the response body was null, there is no specific data to be documented for the JSON schema."
+					},
+					"response": []
+				},
+				{
+					"name": "encrypt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"file_name\": \"java.txt\",\r\n    \"file_location\": \"/state/\",\r\n    \"message\": \"welcome message\",\r\n    \"refernce_number\": \"9876543234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8008/encrypt-decrypt-service/api/encrypt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"encrypt-decrypt-service",
+								"api",
+								"encrypt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "decrypt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "Vu5n8I1rZ5vExLocPmpl8Utv+ilrxVoZbaOQ/ioejIkh7ocK6mF+3tRxPNOUrL6l8nXZawgrvQ0rzew9iXkbSLALVOHWSi7X2KhvBbMNm5bFwoXFvIM3b5ANpzi2r1zu0Chi4uk/R4JgpihIr6cBi4JFRVlSr99+uvdiEJLI6uFGqSN5l9bXlzd1nKW7jEzwgCzqh5wR8AmON8cl2Q3AXQD6R4PHe6MW2M6EGQxxHO7JD4rtB3/0aZcSUw7hIp+6wiAr12bZleCdHyw9aNF6Rex/K9PgTcYxN4RpCMkD3CcAS5Xb2MsMHJ1v7OU8dmOzo9zpE4nU0QSQwm2INOwECtkLtn5qCzLD28PQk00wtLY0meZqm9bAHVmtAkp20pWqBhOO/tM8dSjwleFvzAPLqUis+fcCOHwlPHZuncSnvUBt1hQgrbHzWcCAo/UuNl1zkGzbmC94mbBkTISwnh45aUx8lUVCWAOY71723+Z4StghOFFzNcAuURuMPj9Fp8EHIfCDikgp9kKSSXuokrqOSmOcG9CSoC6ImkAhRsjgGLdr0UHMoEkpS7uSzrLEaCCZKgMbTTecpqRCOKaUyKWIjNUGpp8FP7mmlbrDXqlV+bKyUUpt0/EZdCye71vqOcKsm5PpmacdGOOfFqJZnig0CRSZ8zz5qkKKFApUGj6Lals=",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8008/encrypt-decrypt-service/api/decrypt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8008",
+							"path": [
+								"encrypt-decrypt-service",
+								"api",
+								"decrypt"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customer-service",
+			"item": [
+				{
+					"name": "customer-service/api/add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"name\": \"Ram\",\r\n    \"salary\": 90000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8006/customer-service/api/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8006",
+							"path": [
+								"customer-service",
+								"api",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gell all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8006/customer-service/api/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8006",
+							"path": [
+								"customer-service",
+								"api",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "address-service/api/add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"village\": \"DNLR\",\r\n    \"city\": \"SLPT\",\r\n    \"state\": \"AP\",\r\n    \"pin\": \"524121\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8005/address-service/api/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"address-service",
+								"api",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "address-service/get-all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8005/address-service/api/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8005",
+							"path": [
+								"address-service",
+								"api",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customer-service-create-rest-template",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": {\r\n        \r\n        \"name\": \"RadhaKrishna\",\r\n        \"salary\": 120000\r\n    },\r\n    \"address\": [\r\n        {\r\n            \"addressId\": 101,\r\n            \"village\": \"Gokulam\",\r\n            \"city\": \"Madurai\",\r\n            \"state\": \"Gujarat\",\r\n            \"pin\": 524121\r\n        },\r\n        {\r\n            \"addressId\": 102,\r\n            \"village\": \"Barasana\",\r\n            \"city\": \"Madurai\",\r\n            \"state\": \"Gujarat\",\r\n            \"pin\": 524122\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/customer-service/api/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"customer-service",
+								"api",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "common-apis",
+			"item": [
+				{
+					"name": "springboot-rest-java8/api/user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"Laptop\",\r\n    \"age\": 261,\r\n    \"marital_status\": false,\r\n    \"location\": \"Banglore\",\r\n    \"email_id\": \"rana@gmail.com\",\r\n    \"contact_number\": 9876543211\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/springboot-rest-java8/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"springboot-rest-java8",
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "springboot-rest-java8/api/user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"Laptop\",\r\n    \"age\": 261,\r\n    \"marital_status\": false,\r\n    \"location\": \"Banglore\",\r\n    \"email_id\": \"rana@gmail.com\",\r\n    \"contact_number\": 9876543211\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/springboot-rest-java8/api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"springboot-rest-java8",
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "springboot-rest-java8/api/user/id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"Laptop\",\r\n    \"age\": 261,\r\n    \"marital_status\": false,\r\n    \"location\": \"Banglore\",\r\n    \"email_id\": \"rana@gmail.com\",\r\n    \"contact_number\": 9876543211\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/springboot-rest-java8/api/user/52",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"springboot-rest-java8",
+								"api",
+								"user",
+								"52"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "springboot-rest-java8/api/user/id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"Venkat\",\r\n    \"age\": 26,\r\n    \"location\": \"Damanellore\",\r\n    \"email_id\": \"venky4026@gmail.com\",\r\n    \"contact_number\": 7997227679\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/springboot-rest-java8/api/user/52",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"springboot-rest-java8",
+								"api",
+								"user",
+								"52"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "springboot-rest-java8/api/user/id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"Laptop\",\r\n    \"age\": 261,\r\n    \"marital_status\": false,\r\n    \"location\": \"Banglore\",\r\n    \"email_id\": \"rana@gmail.com\",\r\n    \"contact_number\": 9876543211\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/springboot-rest-java8/api/user/53",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"springboot-rest-java8",
+								"api",
+								"user",
+								"53"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "springboot-rest-java8/api/user/id-email",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_name\": \"Laptop\",\r\n    \"age\": 261,\r\n    \"marital_status\": false,\r\n    \"location\": \"Banglore\",\r\n    \"email_id\": \"rana@gmail.com\",\r\n    \"contact_number\": 9876543211\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/springboot-rest-java8/api/user/email/venky4026@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"springboot-rest-java8",
+								"api",
+								"user",
+								"email",
+								"venky4026@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/mail-service/api/wish",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"tech.venkat26@gmail.com\",\r\n    \"to\": \"tech.venkat21@gmail.com\",\r\n    \"subject\": \"Wish | Greetings\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/mail-service/api/wish",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"mail-service",
+								"api",
+								"wish"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-reg",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"salution\": \"Mr\",\r\n    \"first_name\": \"Venkat\",\r\n    \"last_name\": \"Dasari\",\r\n    \"dob\": \"1995-12-03\",\r\n    \"email_id\": \"tech.venkat21@gmail.com\",\r\n    \"gender\": \"M\",\r\n    \"contact_number\": \"7997227679\",\r\n    \"location\": \"Hydrabad\",\r\n    \"mail_from\":\"tech.venkat26@gmail.com\",\r\n    \"subject\":\"Wish | Greetings\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/user-service/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"user-service",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Month & Day",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2000/user-service/v2/records/by-month-day?month=12&day=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"user-service",
+								"v2",
+								"records",
+								"by-month-day"
+							],
+							"query": [
+								{
+									"key": "month",
+									"value": "12"
+								},
+								{
+									"key": "day",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-service/v1/email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:2000/user-service/v1/email/1232111@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"user-service",
+								"v1",
+								"email",
+								"1232111@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "whatsapp/send",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "to",
+									"value": "whatsapp:+9179972 27679",
+									"type": "text"
+								},
+								{
+									"key": "message",
+									"value": "Hello, this is a test message from WhatsApp API!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:4000/whatsapp-service/api/whatsapp/send",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"whatsapp-service",
+								"api",
+								"whatsapp",
+								"send"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/whatsapp/send\" \\\r\n-d \"to=whatsapp:+123456789\" \\\r\n-d \"message=Hello, this is a test message from WhatsApp API!\""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/payments",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "CorrelationId",
+								"value": "abc123"
+							},
+							{
+								"key": "senderId",
+								"value": "myApp"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"data\": {\r\n    \"additionalReference\": \"string\",\r\n    \"cardIdentification\": \"undefined\",\r\n    \"companyId\": \"SZ0607723\",\r\n    \"countryCode\": \"RE\",\r\n    \"creditorAccount\": \"6582300292312059\",\r\n    \"creditorReference\": \".sV6vOiX/.rKZk4N/dkuY0h_E3uuQV5_a1M\",\r\n    \"debtorAccount\": 269131587403150,\r\n    \"terminalId\": \"k_b5-o|QIw1u1SkUJs1sXuOXP+ggcfoX-[MMQD46UNBp\",\r\n    \"transactionAmount\": 0\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"payments"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \\\r\n  http://localhost:8080/api/payments \\\r\n  -H 'Content-Type: application/json' \\\r\n  -H 'Accept: application/json' \\\r\n  -H 'CorrelationId: abc123' \\\r\n  -H 'senderId: myApp' \\\r\n  -d '{\r\n  \"data\": {\r\n    \"additionalReference\": \"string\",\r\n    \"cardIdentification\": \"undefined\",\r\n    \"companyId\": \"SZ0607723\",\r\n    \"countryCode\": \"RE\",\r\n    \"creditorAccount\": \"6582300292312059\",\r\n    \"creditorReference\": \".sV6vOiX/.rKZk4N/dkuY0h_E3uuQV5_a1M\",\r\n    \"debtorAccount\": 269131587403150,\r\n    \"terminalId\": \"k_b5-o|QIw1u1SkUJs1sXuOXP+ggcfoX-[MMQD46UNBp\",\r\n    \"transactionAmount\": 0\r\n  }\r\n}'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "amazon",
+			"item": [
+				{
+					"name": "POST",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "DVS",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "87654",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_name\": \"Virat\",\r\n    \"email_id\": \"virat@gmail.com\",\r\n    \"age\": 30,\r\n    \"gender\": \"M\",\r\n    \"total_orders\": 18,\r\n    \"product_price\": 200,\r\n    \"payment_status\": true,\r\n    \"customer_location\": \"UK\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/amazon-service/api/v1/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"amazon-service",
+								"api",
+								"v1",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "DVS",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "87654",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_name\": \"Virat\",\r\n    \"customer_location\": \"UK\",\r\n    \"email_id\": \"virat@gmail.com\",\r\n    \"gender\": \"M\",\r\n    \"product_price\": 200.0,\r\n    \"payment_status\": true,\r\n    \"total_orders\": 18,\r\n    \"age\": 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/amazon-service/api/v2/update/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"amazon-service",
+								"api",
+								"v2",
+								"update",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "DVS",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "87654",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_name\": \"Vi1r1111at1q11\",\r\n    \"location\": \"BA\",\r\n    \"email_id\": \"test1111111q21@gmail.com\",\r\n    \"age\": 12,\r\n    \"gender\": \"m\",\r\n    \"total_orders\": 9,\r\n    \"product_price\":200,\r\n    \"payment_status\":true\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/amazon-service/api/v3/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"amazon-service",
+								"api",
+								"v3",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CSV-FILE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "DVS",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "87654",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/amazon-service/api/v1/export-csv",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"amazon-service",
+								"api",
+								"v1",
+								"export-csv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/amazon-service/api/v1/user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "DVS",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "87654",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_name\": \"Virat\",\r\n    \"email_id\": \"virat@gmail.com\",\r\n    \"age\": 30,\r\n    \"gender\": \"M\",\r\n    \"total_orders\": 18,\r\n    \"product_price\": 200,\r\n    \"payment_status\": false,\r\n    \"customer_location\": \"IND\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/amazon-service/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"amazon-service",
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/amazon-service/api/v2/user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "DVS",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "87654",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_name\": \"Anushka\",\r\n    \"email_id\": \"anushka@gmail.com\",\r\n    \"age\": 27,\r\n    \"gender\": \"F\",\r\n    \"total_orders\": 18,\r\n    \"product_price\": 200,\r\n    \"payment_status\": true,\r\n    \"customer_location\": \"IND\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/amazon-service/api/v2/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"amazon-service",
+								"api",
+								"v2",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_ALL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "DVS",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "87654",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_name\": \"Vi1r1111at1q11\",\r\n    \"location\": \"BA\",\r\n    \"email_id\": \"test1111111q21@gmail.com\",\r\n    \"age\": 12,\r\n    \"gender\": \"m\",\r\n    \"total_orders\": 9,\r\n    \"product_price\":200,\r\n    \"payment_status\":true\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/amazon-service/api/v3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"amazon-service",
+								"api",
+								"v3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "random",
+			"item": [
+				{
+					"name": "encryption-service/test-encrypt",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"3\",\r\n    \"name\": \"ABB\",\r\n    \"location\": \"HYD\",\r\n    \"dob\": \"1-2-1999\",\r\n    \"contact_number\": \"98765432\",\r\n    \"email_id\": \"tech@gamil.com\",\r\n    \"occupation\": \"IT\",\r\n    \"marital_status\": \"YES\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8007/encryption-service/test-encrypt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8007",
+							"path": [
+								"encryption-service",
+								"test-encrypt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "encryption-service/test-decrypt",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"encrypted_payload\":\"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAtMjU2In0.F3okEk77gYZ8QfB6P5xHq7O_T3PQY5zhQTTOhOz3a6xqO2RcYfRmCF-mkPR6Lu3UuCJlKtjuU7JinnybBwk5pBu3IkMNOpg0aAy1FFtE5uTZ2pD24gX4EaCjjeR62OXlKk5Z9hYzr1OQSYtgBTdWyjB_avD4r08LdH_X-yO50aKoMnmxkGPfEGse6MU14zHhQDECIZZTNrNI-5g5JSzvyrLhsXrJAO6rE2FH5z1N_drw1v3fIlTue7-D7TFuiPo93nL8ekEr8wg26ODaqNyr1Yxq10gP0OHmHfw5D9sEzrfK1hS1L6N2yQ709B2oI9CNQ2lIsj-Py41ca8cbfopxAg.EybybFXLcV0y4Z_B7mARzA.5ReOWRf4djJ4RAV3CYsy4zqXn6EUDPchCQ04BnIIf6ssoQ7H7tcGpttiWHoryWjti1emCl39ymKa0GypKnCDdR5Ip-6Gnii4Er13gAngiWM4sGMMOnk55gfxjEwzgLCJjZBuJpC8wrcaEgo99p-SHfs5eb5y7RCVhapx4_-8rFN7-fZJqmL4abmTqBZV0I5e44zyyS6k2W2OFgdIm-mASW5OruMqUE5zV-HS_-v7aVIJwYOA20AYfgKpPyEbZtFiMbodBTznfy6ZqS17vq4m-Ks_zyWMwaw_P2Yb9uZ2lSy7JBDtobdp_48heIyg-zHE3CTrAGouGuZo3SB2F72RoWrgLOo48SVKkVNKk1V59E5YYDIIsNSp1QqUuALRzf0mmYZYS86CyZ4M-NWCXiS6pg.uTZ0sE-w9b7HITCCCQ1csw\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8007/encryption-service/test-decrypt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8007",
+							"path": [
+								"encryption-service",
+								"test-decrypt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "encryption-service/hello",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8007/encryption-service/hello",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8007",
+							"path": [
+								"encryption-service",
+								"hello"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customer/add-enc",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"encrypted_payload\": \"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAtMjU2In0.Uh3Uke7ISiVQ5hH9TjjRpprdnkHljaue57Kb5jj9MSOP2PKUUPUolgJEYNPxDVoLSP6YyufJUM4-zaKcjqJPKjABK2RbDbDGQ-f2d-sxtSoAyvqWf1yfD3dMhXuP-Mb4QWjxXXK0UsJ0PAxguP96WdgivaaqK4NLzhZz_RCgYcz4FkXL45tA08t603hQ5JyzdIyg0Y5wmh4LfzcB4bMN0acfHj9sv_4o6nwKRqta11Ake_wov2MOuwoxfiBx63inixFXl4H4cTe6z3Ko4JW-KwMEuUUH4qjRUIgETiuSWKJlHgr8LcOc7l-cYB7JoiVUlZ_kvy0_yYe5QYI61TcRRw.z8slqWRvwyBWF3gqvWigyg.SsoXhlsblTzV0RcLpLvlktMZjBMc5ADlqZ6rGSG3BLo5VlNjwgS5t4nwx4nTPO-dKjNeoOoXur6UU8z7SkdRsuD7SgV6N1Jo5N37i0HVCvOAY8oGJ6JrCvgdf9t0_wMvqkDdN0RMjv46vriiFs_CKAht4mbHci_u_ch1bH0W5RqyqQklyUx7nJWmhk4XqJInAK5o-uVffo89-IYwEHTRxquXfJJV1cHbSnf0nlxM6n8_tayC4Eq_kBQcsItZvVQ4NXTNOB2Vq2vluvmdxAQzdglX1eNAQSSvt5cZkxIiMBM.0NyPpZKQXZRSj5yvqoFOFQ\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/common-encryption-service/api/customer/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"common-encryption-service",
+								"api",
+								"customer",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customer/add-API",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"3\",\r\n    \"name\": \"ABB\",\r\n    \"location\": \"HYD\",\r\n    \"dob\": \"1-2-1999\",\r\n    \"contact_number\": \"98765432\",\r\n    \"email_id\": \"tech@gamil.com\",\r\n    \"occupation\": \"IT\",\r\n    \"marital_status\": \"YES\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8004/registration-service/api/customer/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8004",
+							"path": [
+								"registration-service",
+								"api",
+								"customer",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "amazon-service/api/v1/add",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "DVS",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "87654",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_name\": \"Virat\",\r\n    \"email_id\": \"virat@gmail.com\",\r\n    \"age\": 30,\r\n    \"gender\": \"M\",\r\n    \"total_orders\": 18,\r\n    \"product_price\": 200,\r\n    \"payment_status\": true,\r\n    \"customer_location\": \"UK\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:2000/amazon-service/api/v1/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "2000",
+							"path": [
+								"amazon-service",
+								"api",
+								"v1",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "amazon-service/api/v1/add-enc",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "TTD",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "87654",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"encrypted_payload\":\"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAtMjU2In0.f3zDQlEqSGMyw2Uw3PL1NXsNGBUUaBTvh3ua98r6bSIQ4vyJmVut71MFi1mX4nBk_x2LGwga-iWPpo7XYrGui3rbTPJcxLDR3NQMBxs49FuqSrUuH_V_fCkDMRES0qkl4enxEd-8NW6o0s2vHbaTJSGS5-rGy1MhFvQGZQitFBCoJ0_yEQDA_jPXfECMtrSRNRkk7nDKuk5JeWcSr9XBv5OENOi2XD6ek1bKjqZDrxzak5kf0lQbMNgmmZXu02qdsOUYtpAV_WkLfCZeWRlBdIYbSKDRJ5thx_DwJKQqG8iPWn6y1vnbBESDrHIYm8iplECg5oj-2EOQj2sSY2u2VA.HvPN8G1jll81tv0G1Po6dw.RtQGFnOLtqNhl_NfBwFbLLEhbu4l_gJ2aFK2OnY4aTYT8C4EyMZBrgb4t10JN10zAjcnO_JtFoLMDWP1DZSll8-rtNrcAzJOUa0XRiXQ_gNr4oRJ1tSZiGZDL-ISt8_I3y8rom6C8rfKXbyq7KiX8Fte67DtZYAeJSsAsP2muQhPRkAzwgNPEeuRS2dFF_oOeq7NHmqbiA7P0ULqvkM0b2d0yRLKAi6q8WvgpCsa2u9ukaX--SVLvhtWVhEWshkkTI8pw_DoGJPZ88nUGCIOMkyatox8wM6yGxVrrIOmx64.T4Wnf77jEW3iX5xuEK0nSg\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/common-encryption-service/api/v1/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"common-encryption-service",
+								"api",
+								"v1",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "amazon-service/api/v1/add-enc-channel",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "channel_identifer",
+								"value": "DVS",
+								"type": "text"
+							},
+							{
+								"key": "transaction_date_time",
+								"value": "2024-12-30 12:15:30",
+								"type": "text"
+							},
+							{
+								"key": "transaction_time_zone",
+								"value": "IND",
+								"type": "text"
+							},
+							{
+								"key": "country_of_origin",
+								"value": "IST",
+								"type": "text"
+							},
+							{
+								"key": "transaction_id",
+								"value": "87654",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"encrypted_payload\":\"eyJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBLU9BRVAtMjU2In0.f3zDQlEqSGMyw2Uw3PL1NXsNGBUUaBTvh3ua98r6bSIQ4vyJmVut71MFi1mX4nBk_x2LGwga-iWPpo7XYrGui3rbTPJcxLDR3NQMBxs49FuqSrUuH_V_fCkDMRES0qkl4enxEd-8NW6o0s2vHbaTJSGS5-rGy1MhFvQGZQitFBCoJ0_yEQDA_jPXfECMtrSRNRkk7nDKuk5JeWcSr9XBv5OENOi2XD6ek1bKjqZDrxzak5kf0lQbMNgmmZXu02qdsOUYtpAV_WkLfCZeWRlBdIYbSKDRJ5thx_DwJKQqG8iPWn6y1vnbBESDrHIYm8iplECg5oj-2EOQj2sSY2u2VA.HvPN8G1jll81tv0G1Po6dw.RtQGFnOLtqNhl_NfBwFbLLEhbu4l_gJ2aFK2OnY4aTYT8C4EyMZBrgb4t10JN10zAjcnO_JtFoLMDWP1DZSll8-rtNrcAzJOUa0XRiXQ_gNr4oRJ1tSZiGZDL-ISt8_I3y8rom6C8rfKXbyq7KiX8Fte67DtZYAeJSsAsP2muQhPRkAzwgNPEeuRS2dFF_oOeq7NHmqbiA7P0ULqvkM0b2d0yRLKAi6q8WvgpCsa2u9ukaX--SVLvhtWVhEWshkkTI8pw_DoGJPZ88nUGCIOMkyatox8wM6yGxVrrIOmx64.T4Wnf77jEW3iX5xuEK0nSg\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/common-encryption-service/api/v1/add-channel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"common-encryption-service",
+								"api",
+								"v1",
+								"add-channel"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "token-service",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/payments",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "CorrelationId",
+								"value": "abc123"
+							},
+							{
+								"key": "senderId",
+								"value": "myApp"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"data\": {\r\n    \"additionalReference\": \"string\",\r\n    \"cardIdentification\": \"undefined\",\r\n    \"companyId\": \"SZ0607723\",\r\n    \"countryCode\": \"RE\",\r\n    \"creditorAccount\": \"6582300292312059\",\r\n    \"creditorReference\": \".sV6vOiX/.rKZk4N/dkuY0h_E3uuQV5_a1M\",\r\n    \"debtorAccount\": 269131587403150,\r\n    \"terminalId\": \"k_b5-o|QIw1u1SkUJs1sXuOXP+ggcfoX-[MMQD46UNBp\",\r\n    \"transactionAmount\": 0\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "grant_type",
+								"value": "client_credentials",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
